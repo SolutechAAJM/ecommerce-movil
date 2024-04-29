@@ -7,9 +7,9 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import stylesG from './stylesG';
+import stylesG from '../../../stylesG';
 
-function App(): React.JSX.Element {
+function Dashboard(): React.JSX.Element {
   
   return (
     <SafeAreaView>
@@ -125,4 +125,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default Dashboard;
