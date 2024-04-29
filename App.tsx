@@ -1,10 +1,8 @@
 import React from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from 'react-native';
 import stylesG from './stylesG';
@@ -12,111 +10,68 @@ import stylesG from './stylesG';
 function App(): React.JSX.Element {
   
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.conteinerPrincipal}>
-          <View style={styles.conteinerCommon}>
-            <View style={styles.ejemplo} />
-            <View style={styles.conteinerSearcher}>
-              <TextInput
-                style={styles.searcher}
-                placeholder="I am looking for..."
-              />
-              <View style={styles.ejemplo} />
-            </View>
-          </View>
-          <View style={styles.conteinerCommon}>
-            <Text>Categorias</Text>
-            <View style={styles.conteinerCategories}>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Camisas</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Blusas</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Zapatos</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Trajes</Text>
-              </View>
-            </View>
-            <View style={styles.conteinerCategories}>
-            <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Vestido</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Deportiva</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Toallas</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Pantalones</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.conteinerCommon}>
-            <Text>Algo mas</Text>
-          </View>
-          </View>
-      </ScrollView>
+    <SafeAreaView style={styles.nav}>
+      <View style={styles.conteinerInfo}>
+      <View style={styles.ejemplo} />
+        <View>
+          <Text>Lolita Martinez</Text>
+          <Text>Lolita@gmail.com</Text>
+          <Text>Edit Profile</Text>
+        </View>
+      </View>
+      <View style={styles.conteinerButtons}>
+        <View style={styles.ejemplo} />
+        <Text>Home</Text>
+      </View>
+      <View style={styles.conteinerButtons}>
+        <View style={styles.ejemplo} />
+        <Text>Category</Text>
+      </View>
+      <View style={styles.conteinerButtons}>
+        <View style={styles.ejemplo} />
+        <Text>Order</Text>
+      </View>
+      <View style={styles.conteinerButtons}>
+        <View style={styles.ejemplo} />
+        <Text>Setting</Text>
+      </View>
+      <View style={styles.conteinerButtons}>
+        <View style={styles.ejemplo} />
+        <Text>Contact Us</Text>
+      </View>
+      <View style={styles.conteinerButtons}>
+        <View style={styles.ejemplo} />
+        <Text>Exit</Text>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  conteinerPrincipal: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-  },
-  conteinerCommon: {
-    width:'90%',
-    minHeight:150,
-    marginTop:30,
-    padding:6,
-    backgroundColor:stylesG.primaryColor,
-    borderRadius: 20,
-  },
-  conteinerSearcher:{
+  nav:{
     flex:1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
+    width:'65%',
+    backgroundColor:stylesG.terceryColor,
+    borderTopRightRadius: 20,
   },
-  searcher:{
-    minWidth:'85%',
-    backgroundColor: 'white',
-    borderRadius: 20,
-  },
-  conteinerCategories:{
-    flex:1,
+  conteinerInfo: {
+    padding:40,
+    marginBottom:20,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    gap: 20,
+    backgroundColor: stylesG.secundaryColor,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
   },
-  conteinerCategory:{
-    minHeight:90,
-    margin:5,
-    padding:2,
-    flex:1,
-    justifyContent: 'center',
+  conteinerButtons:{
+    marginTop:20,
+    paddingLeft:40,
     alignItems: 'center',
-    flexDirection: 'column',
-    backgroundColor:stylesG.secundaryColor,
-    borderRadius: 20,
-    borderColor: 'black',
-    borderWidth: 1,
+    flexDirection: 'row',
+    gap:10
   },
   ejemplo:{
     width:30,
