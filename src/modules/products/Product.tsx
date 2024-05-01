@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import stylesG from './stylesG';
+import stylesG from '../../../stylesG';
 
-function App(): React.JSX.Element {
+function Product(): React.JSX.Element {
   
   return (
     <SafeAreaView style={styles.product}>
@@ -210,4 +210,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default Product;
