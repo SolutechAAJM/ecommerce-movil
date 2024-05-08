@@ -21,7 +21,7 @@ function Login(): React.JSX.Element {
             <View style={styles.vwIconLogin}>
               <View style={styles.ejemplo} />
             </View>
-            <View style={styles.vwForm}>
+            <View style={stylesAuth.vwForm}>
                 <View style={stylesAuth.vwInputLoginSignUp}>
                   <View style={stylesAuth.vwIconsLoginSignUp}>
                     <View style={styles.ejemplo} />
@@ -44,10 +44,15 @@ function Login(): React.JSX.Element {
                 <TouchableOpacity style={stylesAuth.oTLoginSignUp}>
                   <Text>Log in</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={stylesAuth.oTLoginSignUp}>
-                  <Text>Sign up</Text>
-                </TouchableOpacity>
                 <Text>Forgot your account?</Text>
+              </View>
+              <View style={stylesAuth.vwNavLoginSignUp}>
+                <TouchableOpacity>
+                  <Text style={stylesAuth.txtNavLoginSignUp}>Sign up</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={stylesAuth.txtNavLoginSignUp}>Login</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>

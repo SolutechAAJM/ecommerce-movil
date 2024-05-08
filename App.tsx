@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import stylesG from './stylesG';
 import stylesAuth from './src/modules/auth/styles/stylesAuth';
+import { UserIcon, Lock } from './Icons';
+
 
 function App(): React.JSX.Element {
   
@@ -19,35 +21,42 @@ function App(): React.JSX.Element {
         <View style={styles.vwLogin}>
           <View style={stylesAuth.vwDecoration}>
             <View style={styles.vwIconLogin}>
-              <View style={styles.ejemplo} />
+              <UserIcon size={70} color="black" />
             </View>
-            <View style={styles.vwForm}>
-                <View style={styles.vwInputLoginSignUp}>
-                  <View style={styles.vwIconsLoginSignUp}>
-                    <View style={styles.ejemplo} />
+            <View style={stylesAuth.vwForm}>
+                <View style={stylesAuth.vwInputLoginSignUp}>
+                  <View style={stylesAuth.vwIconsLoginSignUp}>
+                    <UserIcon size={20} color='black' />
                   </View>
                   <TextInput 
-                  style={styles.txtInputLoginSignUp}
+                  style={stylesAuth.txtInputLoginSignUp}
                   placeholder="Login"
+                  placeholderTextColor={stylesAuth.txtClrPlaceholder}
                   />
                 </View>
-                <View style={styles.vwInputLoginSignUp}>
-                  <View style={styles.vwIconsLoginSignUp}>
-                    <View style={styles.ejemplo} />
+                <View style={stylesAuth.vwInputLoginSignUp}>
+                  <View style={stylesAuth.vwIconsLoginSignUp}>
+                    <Lock size={20} color='black' />
                   </View>
                   <TextInput 
-                  style={styles.txtInputLoginSignUp}
+                  style={stylesAuth.txtInputLoginSignUp}
                   placeholder="Password"
+                  placeholderTextColor={stylesAuth.txtClrPlaceholder}
                   />
                 </View>
-              <View style={styles.vwBtnLoginSignUp}>
-                <TouchableOpacity style={styles.oTLoginSignUp}>
-                  <Text>Log in</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.oTLoginSignUp}>
-                  <Text>Sign up</Text>
+              <View style={stylesAuth.vwBtnLoginSignUp}>
+                <TouchableOpacity style={stylesAuth.oTLoginSignUp}>
+                  <Text style={stylesAuth.txtBtnLoginSignUp}>Log in</Text>
                 </TouchableOpacity>
                 <Text>Forgot your account?</Text>
+              </View>
+              <View style={stylesAuth.vwNavLoginSignUp}>
+                <TouchableOpacity>
+                  <Text style={stylesAuth.txtNavLoginSignUp}>Sign up</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={stylesAuth.txtNavLoginSignUp}>Login</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -77,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     position:'absolute',
-    top:60,
+    top:80,
     backgroundColor:'white',
     borderRadius:50,
     zIndex:2,
@@ -91,42 +100,6 @@ const styles = StyleSheet.create({
     borderRadius:50,
     gap:30,
     paddingTop:20,
-  },
-  vwInputLoginSignUp:{
-    width:'80%',
-    alignItems:'center',
-    justifyContent:'center',
-    flexDirection:'row'
-  },
-  vwIconsLoginSignUp:{
-    width:'20%',
-    height:40,
-    backgroundColor:'white',
-    alignItems:'center',
-    justifyContent:'center',
-    borderTopLeftRadius:50,
-    borderBottomLeftRadius:50,
-  },
-  txtInputLoginSignUp:{
-    width:'80%',
-    height:40,
-    backgroundColor:'white',
-    borderTopRightRadius:50,
-    borderBottomRightRadius:50,
-  },
-  vwBtnLoginSignUp:{
-    width:'100%',
-    alignItems:'center',
-    justifyContent:'center',
-    gap:15,
-  },
-  oTLoginSignUp:{
-    width:'30%',
-    height:40,
-    alignItems:'center',
-    justifyContent:'center',
-    backgroundColor:'white',
-    borderRadius:50,
   },
   ejemplo:{
     width:30,
