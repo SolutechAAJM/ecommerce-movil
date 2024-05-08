@@ -4,83 +4,53 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import stylesG from './stylesG';
+import stylesAuth from './src/modules/auth/styles/stylesAuth';
 
 function App(): React.JSX.Element {
   
   return (
-    <SafeAreaView style={styles.product}>
+    <SafeAreaView>
       <ScrollView>
-      <View style={styles.vwDecoration} />
-        <View style={styles.content}>
-          <View style={styles.vwImgProduct}>
-            <View style={styles.vwImgBtn}>
+        <View style={styles.vwLogin}>
+          <View style={stylesAuth.vwDecoration}>
+            <View style={styles.vwIconLogin}>
               <View style={styles.ejemplo} />
-              <View style={styles.vwBtnLR}>
-                <TouchableOpacity>
-                  <View style={styles.ejemplo} />
+            </View>
+            <View style={styles.vwForm}>
+                <View style={styles.vwInputLoginSignUp}>
+                  <View style={styles.vwIconsLoginSignUp}>
+                    <View style={styles.ejemplo} />
+                  </View>
+                  <TextInput 
+                  style={styles.txtInputLoginSignUp}
+                  placeholder="Login"
+                  />
+                </View>
+                <View style={styles.vwInputLoginSignUp}>
+                  <View style={styles.vwIconsLoginSignUp}>
+                    <View style={styles.ejemplo} />
+                  </View>
+                  <TextInput 
+                  style={styles.txtInputLoginSignUp}
+                  placeholder="Password"
+                  />
+                </View>
+              <View style={styles.vwBtnLoginSignUp}>
+                <TouchableOpacity style={styles.oTLoginSignUp}>
+                  <Text>Log in</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <View style={styles.ejemplo} />
+                <TouchableOpacity style={styles.oTLoginSignUp}>
+                  <Text>Sign up</Text>
                 </TouchableOpacity>
+                <Text>Forgot your account?</Text>
               </View>
             </View>
-            <Text style={styles.txtQuantity}>1/7</Text>
           </View>
-          <View style={styles.vwPriceLikeShare}>
-            <Text>$100</Text>
-            <View style={styles.vwLikeShare}>
-              <TouchableOpacity style={styles.TOLikeShare}>
-                <View style={styles.ejemplo} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.TOLikeShare}>
-                <View style={styles.ejemplo} />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.vwColor}>
-            <Text>Zapato azul</Text>
-            <View style={styles.vwImgColor}>
-              <TouchableOpacity style={styles.TOImgColor}>
-                <View style={styles.ejemplo} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.TOImgColor}>
-                <View style={styles.ejemplo} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.TOImgColor}>
-                <View style={styles.ejemplo} />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.vwSize}>
-            <Text>Select size</Text>
-            <View style={styles.vwSizes}>
-              <TouchableOpacity style={styles.TOSize}>
-                <Text>35</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.TOSize}>
-                <Text>36</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.TOSize}>
-                <Text>37</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.TOSize}>
-                <Text>38</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.TOSize}>
-                <Text>39</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.TOSize}>
-                <Text>40</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.TOBuy}>
-            <Text>Buy now</Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -88,120 +58,75 @@ function App(): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  product:{
-    flex: 1,
-    backgroundColor:stylesG.terceryColor,
-  },
-  content:{
+  vwLogin:{
+    flex:1,
     alignItems:'center',
     justifyContent:'center',
-    gap:30,
+    height:800,
   },
-  vwDecoration:{
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    width:'100%',
-    height:200,
-    backgroundColor:stylesG.primaryColor,
+  vwLoginSon:{
+    width:'80%',
+    height:'80%',
+    alignItems:'center',
+    justifyContent:'center',
+    position:'relative',
+  },
+  vwIconLogin:{
+    width:100,
+    height:100,
+    alignItems:'center',
+    justifyContent:'center',
+    position:'absolute',
+    top:60,
+    backgroundColor:'white',
+    borderRadius:50,
+    zIndex:2,
+  },
+  vwForm:{
+    width:'90%',
+    height:'60%',
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:stylesG.secundaryColor,
+    borderRadius:50,
+    gap:30,
+    paddingTop:20,
+  },
+  vwInputLoginSignUp:{
+    width:'80%',
+    alignItems:'center',
+    justifyContent:'center',
+    flexDirection:'row'
+  },
+  vwIconsLoginSignUp:{
+    width:'20%',
+    height:40,
+    backgroundColor:'white',
+    alignItems:'center',
+    justifyContent:'center',
+    borderTopLeftRadius:50,
     borderBottomLeftRadius:50,
+  },
+  txtInputLoginSignUp:{
+    width:'80%',
+    height:40,
+    backgroundColor:'white',
+    borderTopRightRadius:50,
     borderBottomRightRadius:50,
   },
-  vwImgProduct:{
-    flexDirection:'row',
-    justifyContent: 'center', 
-    alignItems:'center',
-    marginTop:30,
-    padding:20,
-    backgroundColor:stylesG.secundaryColor,
-    width:'85%',
-    minHeight:300,
-    borderRadius:30,
-  },
-  vwImgBtn:{
-    flexDirection:'column',
-    justifyContent: 'center', 
-    alignItems:'center',
-    width:'80%',
-    gap:10,
-  },
-  vwBtnLR:{
-    flexDirection:'row',
-    justifyContent: 'center', 
-    alignItems:'center',
-    gap:10,
-  },
-  txtQuantity:{
-    position: 'absolute',
-    right:30,
-    bottom:30,
-  },
-  vwPriceLikeShare:{
-    width:'80%',
-    flexDirection:'row',
-    justifyContent: 'space-between',
-    alignItems:'flex-end',
-  },
-  vwLikeShare:{
-    flexDirection:'row',
-    gap:10,
-  },
-  TOLikeShare:{
-    width:50,
-    height:50,
-    backgroundColor:stylesG.secundaryColor,
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:15,
-  },
-  vwColor:{
-    width:'80%',
-    gap:30,
-  },
-  vwImgColor:{
+  vwBtnLoginSignUp:{
     width:'100%',
-    flexDirection:'row',
-    justifyContent:'center',
-    gap:30,
-  },
-  TOImgColor:{
-    width:100,
-    height:60,
-    backgroundColor:stylesG.secundaryColor,
-    justifyContent:'center',
     alignItems:'center',
-    borderRadius:20,
-    borderColor: 'black',
-    borderWidth: 1,
-  },
-  vwSize:{
-    width:'80%',
-    gap:30,
-  },
-  vwSizes:{
-    width:'100%',
-    flexDirection:'row',
     justifyContent:'center',
     gap:15,
   },
-  TOSize:{
-    width:50,
+  oTLoginSignUp:{
+    width:'30%',
     height:40,
-    backgroundColor:stylesG.secundaryColor,
-    justifyContent:'center',
     alignItems:'center',
-    borderRadius:10,
-    borderColor: 'black',
-    borderWidth: 1,
-  },
-  TOBuy:{
-    width:100,
-    height:50,
-    backgroundColor:stylesG.primaryColor,
     justifyContent:'center',
-    alignItems:'center',
-    borderRadius:10,
+    backgroundColor:'white',
+    borderRadius:50,
   },
   ejemplo:{
     width:30,
