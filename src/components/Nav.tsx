@@ -6,6 +6,7 @@ import {
   View,
 } from 'react-native';
 import stylesG from '../../stylesG';
+import { BoxCheck, Category, CircleUser, Exit, Gear, HouseChimney } from '../../Icons';
 
 function Nav(): React.JSX.Element {
   
@@ -20,27 +21,27 @@ function Nav(): React.JSX.Element {
         </View>
       </View>
       <View style={styles.conteinerButtons}>
-        <View style={styles.ejemplo} />
+        <HouseChimney size={30} color="black"/>
         <Text>Home</Text>
       </View>
       <View style={styles.conteinerButtons}>
-        <View style={styles.ejemplo} />
+        <Category size={30} color="black"/>
         <Text>Category</Text>
       </View>
       <View style={styles.conteinerButtons}>
-        <View style={styles.ejemplo} />
+        <BoxCheck size={30} color="black"/>
         <Text>Order</Text>
       </View>
       <View style={styles.conteinerButtons}>
-        <View style={styles.ejemplo} />
+        <Gear size={30} color="black"/>
         <Text>Setting</Text>
       </View>
       <View style={styles.conteinerButtons}>
-        <View style={styles.ejemplo} />
+        <CircleUser size={30} color="black" />
         <Text>Contact Us</Text>
       </View>
       <View style={styles.conteinerButtons}>
-        <View style={styles.ejemplo} />
+        <Exit size={30} color="black" />
         <Text>Exit</Text>
       </View>
     </SafeAreaView>

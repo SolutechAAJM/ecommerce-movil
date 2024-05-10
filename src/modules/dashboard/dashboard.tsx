@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import stylesG from '../../../stylesG';
+import { CartShopping, Bars } from '../../../Icons';
 
 function Dashboard(): React.JSX.Element {
   
@@ -16,13 +17,13 @@ function Dashboard(): React.JSX.Element {
       <ScrollView>
         <View style={styles.conteinerPrincipal}>
           <View style={styles.conteinerCommon}>
-            <View style={styles.ejemplo} />
+            <Bars size={30} color="black" />
             <View style={styles.conteinerSearcher}>
               <TextInput
                 style={styles.searcher}
                 placeholder="I am looking for..."
               />
-              <View style={styles.ejemplo} />
+              <CartShopping size={30} color="black"/>
             </View>
           </View>
           <View style={styles.conteinerCommon}>

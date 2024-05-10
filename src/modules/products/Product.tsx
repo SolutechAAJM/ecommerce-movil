@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import stylesG from '../../../stylesG';
+import { Heart, ShareNodes } from '../../../Icons';
 
 function Product(): React.JSX.Element {
   
@@ -33,24 +34,24 @@ function Product(): React.JSX.Element {
           <View style={styles.vwPriceLikeShare}>
             <Text>$100</Text>
             <View style={styles.vwLikeShare}>
-              <TouchableOpacity style={styles.TOLikeShare}>
-                <View style={styles.ejemplo} />
+              <TouchableOpacity style={styles.tOLikeShare}>
+                <ShareNodes size={35} color='white' />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.TOLikeShare}>
-                <View style={styles.ejemplo} />
+              <TouchableOpacity style={styles.tOLikeShare}>
+                <Heart size={35} color='white' />
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.vwColor}>
             <Text>Zapato azul</Text>
             <View style={styles.vwImgColor}>
-              <TouchableOpacity style={styles.TOImgColor}>
+              <TouchableOpacity style={styles.tOImgColor}>
                 <View style={styles.ejemplo} />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.TOImgColor}>
+              <TouchableOpacity style={styles.tOImgColor}>
                 <View style={styles.ejemplo} />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.TOImgColor}>
+              <TouchableOpacity style={styles.tOImgColor}>
                 <View style={styles.ejemplo} />
               </TouchableOpacity>
             </View>
@@ -58,27 +59,24 @@ function Product(): React.JSX.Element {
           <View style={styles.vwSize}>
             <Text>Select size</Text>
             <View style={styles.vwSizes}>
-              <TouchableOpacity style={styles.TOSize}>
+              <TouchableOpacity style={styles.tOSize}>
                 <Text>35</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.TOSize}>
+              <TouchableOpacity style={styles.tOSize}>
                 <Text>36</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.TOSize}>
+              <TouchableOpacity style={styles.tOSize}>
                 <Text>37</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.TOSize}>
+              <TouchableOpacity style={styles.tOSize}>
                 <Text>38</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.TOSize}>
+              <TouchableOpacity style={styles.tOSize}>
                 <Text>39</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.TOSize}>
-                <Text>40</Text>
               </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity style={styles.TOBuy}>
+          <TouchableOpacity style={styles.tOBuy}>
             <Text>Buy now</Text>
           </TouchableOpacity>
         </View>
@@ -147,7 +145,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     gap:10,
   },
-  TOLikeShare:{
+  tOLikeShare:{
     width:50,
     height:50,
     backgroundColor:stylesG.secundaryColor,
@@ -165,7 +163,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     gap:30,
   },
-  TOImgColor:{
+  tOImgColor:{
     width:100,
     height:60,
     backgroundColor:stylesG.secundaryColor,
@@ -185,7 +183,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     gap:15,
   },
-  TOSize:{
+  tOSize:{
     width:50,
     height:40,
     backgroundColor:stylesG.secundaryColor,
@@ -195,7 +193,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
   },
-  TOBuy:{
+  tOBuy:{
     width:100,
     height:50,
     backgroundColor:stylesG.primaryColor,

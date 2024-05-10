@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import stylesG from '../../../stylesG';
 import stylesAuth from './styles/stylesAuth';
+import { CircleUser, User, Lock } from '../../../Icons';
 
 function Login(): React.JSX.Element {
   
@@ -19,30 +20,32 @@ function Login(): React.JSX.Element {
         <View style={styles.vwLogin}>
           <View style={stylesAuth.vwDecoration}>
             <View style={styles.vwIconLogin}>
-              <View style={styles.ejemplo} />
+              <CircleUser size={90} color="black" />
             </View>
             <View style={stylesAuth.vwForm}>
                 <View style={stylesAuth.vwInputLoginSignUp}>
                   <View style={stylesAuth.vwIconsLoginSignUp}>
-                    <View style={styles.ejemplo} />
+                    <User size={20} color='black' />
                   </View>
                   <TextInput 
                   style={stylesAuth.txtInputLoginSignUp}
                   placeholder="Login"
+                  placeholderTextColor={stylesAuth.txtClrPlaceholder}
                   />
                 </View>
                 <View style={stylesAuth.vwInputLoginSignUp}>
                   <View style={stylesAuth.vwIconsLoginSignUp}>
-                    <View style={styles.ejemplo} />
+                    <Lock size={20} color='black' />
                   </View>
                   <TextInput 
                   style={stylesAuth.txtInputLoginSignUp}
                   placeholder="Password"
+                  placeholderTextColor={stylesAuth.txtClrPlaceholder}
                   />
                 </View>
               <View style={stylesAuth.vwBtnLoginSignUp}>
                 <TouchableOpacity style={stylesAuth.oTLoginSignUp}>
-                  <Text>Log in</Text>
+                  <Text style={stylesAuth.txtBtnLoginSignUp}>Log in</Text>
                 </TouchableOpacity>
                 <Text>Forgot your account?</Text>
               </View>
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     position:'absolute',
-    top:60,
+    top:80,
     backgroundColor:'white',
     borderRadius:50,
     zIndex:2,
@@ -96,11 +99,6 @@ const styles = StyleSheet.create({
     borderRadius:50,
     gap:30,
     paddingTop:20,
-  },
-  ejemplo:{
-    width:30,
-    height:30,
-    backgroundColor:'blue',
   }
 });
 

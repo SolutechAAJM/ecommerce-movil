@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import stylesG from '../../../stylesG';
 import stylesAuth from './styles/stylesAuth';
+import { User, Lock, Envelope } from '../../../Icons'; 
 
 function SignUp(): React.JSX.Element {
   
@@ -22,7 +23,7 @@ function SignUp(): React.JSX.Element {
             <View style={stylesAuth.vwForm}>
                 <View style={stylesAuth.vwInputLoginSignUp}>
                   <View style={stylesAuth.vwIconsLoginSignUp}>
-                    <View style={styles.ejemplo} />
+                    <User size={20} color="black" />
                   </View>
                   <TextInput 
                   style={stylesAuth.txtInputLoginSignUp}
@@ -32,7 +33,7 @@ function SignUp(): React.JSX.Element {
                 </View>
                 <View style={stylesAuth.vwInputLoginSignUp}>
                   <View style={stylesAuth.vwIconsLoginSignUp}>
-                    <View style={styles.ejemplo} />
+                    <Envelope size={20} color="black" />
                   </View>
                   <TextInput 
                   style={stylesAuth.txtInputLoginSignUp}
@@ -42,7 +43,7 @@ function SignUp(): React.JSX.Element {
                 </View>
                 <View style={stylesAuth.vwInputLoginSignUp}>
                   <View style={stylesAuth.vwIconsLoginSignUp}>
-                    <View style={styles.ejemplo} />
+                    <Lock size={20} color="black"/>
                   </View>
                   <TextInput 
                   style={stylesAuth.txtInputLoginSignUp}
@@ -87,11 +88,6 @@ const styles = StyleSheet.create({
     borderRadius:50,
     fontSize:30,
     color:'white',
-  },
-  ejemplo:{
-    width:30,
-    height:30,
-    backgroundColor:'blue',
   }
 });
 
