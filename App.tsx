@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import stylesG from './stylesG';
 import stylesAuth from './src/modules/auth/styles/stylesAuth';
-import { UserIcon, Lock } from './Icons';
+import { UserIcon, CircleUser, Lock } from './Icons';
 
 
 function App(): React.JSX.Element {
@@ -21,7 +21,7 @@ function App(): React.JSX.Element {
         <View style={styles.vwLogin}>
           <View style={stylesAuth.vwDecoration}>
             <View style={styles.vwIconLogin}>
-              <UserIcon size={70} color="black" />
+              <CircleUser size={90} color="black" />
             </View>
             <View style={stylesAuth.vwForm}>
                 <View style={stylesAuth.vwInputLoginSignUp}>
