@@ -116,7 +116,7 @@ const Share = ({ size=20, color = '#000' }) => (
   </Svg>
 );
 
-const Category = ({ size=20, color = '#000' }) => (
+const CategoryIcon = ({ size=20, color = '#000' }) => (
   <Svg
     width={size}
     height={size}
@@ -191,4 +191,4 @@ const HouseChimney = ({ size=20, color = '#000' }) => (
       />
   </Svg>
 );
-export { User, CircleUser, Lock, Envelope, Bars, CartShopping, Exit, Heart, Share, Category, BoxCheck, Gear, ShareNodes, HouseChimney };
+export { User, CircleUser, Lock, Envelope, Bars, CartShopping, Exit, Heart, Share, CategoryIcon, BoxCheck, Gear, ShareNodes, HouseChimney };
