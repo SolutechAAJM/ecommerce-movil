@@ -13,6 +13,7 @@ import stylesG from './stylesG';
 import stylesAuth from './src/modules/auth/styles/stylesAuth';
 import CategoryItem  from './src/modules/dashboard/components/Category';
 import { Bars, BoxCheck, CartShopping, CategoryIcon, CircleUser, Exit, Gear, Heart, HouseChimney, ShareNodes } from './Icons';
+import Login from './src/modules/auth/Login';
 
 interface Category {
   id: number;
@@ -35,46 +36,7 @@ const App: React.FC = () => {
 
 return (
   <SafeAreaView>
-    <ScrollView>
-      <View style={styles.conteinerPrincipal}>
-        <View style={styles.conteinerCommon}>
-          <Bars size={30} color="black" />
-          <View style={styles.conteinerSearcher}>
-            <TextInput
-              style={styles.searcher}
-              placeholder="I am looking for..."
-            />
-            <CartShopping size={30} color="black"/>
-          </View>
-        </View>
-        <View style={styles.conteinerCommon}>
-          <Text>Categorias</Text>
-          <View style={styles.conteinerCategories}>
-              <FlatList
-                  data={categories}
-                  horizontal
-                  pagingEnabled
-                  showsHorizontalScrollIndicator={false}
-                  renderItem={renderCategory}
-                  keyExtractor={(item) => item.id.toString()}
-              />
-          </View>
-          <View style={styles.conteinerCategories}>
-              <FlatList
-                  data={categories}
-                  horizontal
-                  pagingEnabled
-                  showsHorizontalScrollIndicator={false}
-                  renderItem={renderCategory}
-                  keyExtractor={(item) => item.id.toString()}
-              />
-          </View>
-        </View>
-        <View style={styles.conteinerCommon}>
-          <Text>Algo mas</Text>
-        </View>
-        </View>
-    </ScrollView>
+   <Login></Login>
   </SafeAreaView>
 );
 }

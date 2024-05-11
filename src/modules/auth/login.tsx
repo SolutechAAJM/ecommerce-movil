@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  Alert,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -11,9 +12,22 @@ import {
 import stylesG from '../../../stylesG';
 import stylesAuth from './styles/stylesAuth';
 import { CircleUser, User, Lock } from '../../../Icons';
+import { authServices } from './components/Request';
 
 function Login(): React.JSX.Element {
-  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const login = async () =>{
+    authServices.loginRequest({email,password})
+      .then(response => {
+        alert(JSON.stringify(response.data.message))
+    })
+    .catch(error => {
+        alert(JSON.stringify(error.response.data.message))
+    })
+  }
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -31,6 +45,9 @@ function Login(): React.JSX.Element {
                   style={stylesAuth.txtInputLoginSignUp}
                   placeholder="Login"
                   placeholderTextColor={stylesAuth.txtClrPlaceholder}
+                  id='emailInput'
+                  onChangeText={text => setEmail(text)}
+                  value={email}
                   />
                 </View>
                 <View style={stylesAuth.vwInputLoginSignUp}>
@@ -41,10 +58,15 @@ function Login(): React.JSX.Element {
                   style={stylesAuth.txtInputLoginSignUp}
                   placeholder="Password"
                   placeholderTextColor={stylesAuth.txtClrPlaceholder}
+                  id='passwordInput'
+                  onChangeText={text => setPassword(text)}
+                  value={password}
                   />
                 </View>
               <View style={stylesAuth.vwBtnLoginSignUp}>
-                <TouchableOpacity style={stylesAuth.oTLoginSignUp}>
+                <TouchableOpacity style={stylesAuth.oTLoginSignUp}
+                onPress={login}
+                >
                   <Text style={stylesAuth.txtBtnLoginSignUp}>Log in</Text>
                 </TouchableOpacity>
                 <Text>Forgot your account?</Text>

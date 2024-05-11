@@ -1,0 +1,1 @@
+export const urlBase:string = 'https://ecommerce-7or3.onrender.com/'
