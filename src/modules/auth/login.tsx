@@ -13,6 +13,7 @@ import stylesAuth from './styles/stylesAuth';
 import { CircleUser, User, Lock } from '../../../Icons';
 import { authServices } from './components/Request';
 import { useNavigation } from '@react-navigation/native';
+import { labels } from '../admin/labels';
 
 function Login(): React.JSX.Element {
   const [email, setEmail] = useState('');
@@ -68,7 +69,7 @@ function Login(): React.JSX.Element {
                 <TouchableOpacity style={stylesAuth.oTLoginSignUp}
                 onPress={login}
                 >
-                  <Text style={stylesAuth.txtBtnLoginSignUp}>Log in</Text>
+                  <Text style={stylesAuth.txtBtnLoginSignUp}>{labels.login}</Text>
                 </TouchableOpacity>
                 <Text>Forgot your account?</Text>
               </View>
