@@ -6,7 +6,8 @@ import {
   View,
 } from 'react-native';
 import stylesG from '../../stylesG';
-import { BoxCheck, Category, CircleUser, Exit, Gear, HouseChimney } from '../../Icons';
+import { BoxCheck, CategoryIcon, CircleUser, Exit, Gear, HouseChimney } from '../../Icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function Nav(): React.JSX.Element {
   
@@ -20,30 +21,30 @@ function Nav(): React.JSX.Element {
           <Text>Edit Profile</Text>
         </View>
       </View>
-      <View style={styles.conteinerButtons}>
+      <TouchableOpacity style={styles.conteinerButtons}>
         <HouseChimney size={30} color="black"/>
         <Text>Home</Text>
-      </View>
-      <View style={styles.conteinerButtons}>
-        <Category size={30} color="black"/>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.conteinerButtons}>
+        <CategoryIcon size={30} color="black"/>
         <Text>Category</Text>
-      </View>
-      <View style={styles.conteinerButtons}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.conteinerButtons}>
         <BoxCheck size={30} color="black"/>
         <Text>Order</Text>
-      </View>
-      <View style={styles.conteinerButtons}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.conteinerButtons}>
         <Gear size={30} color="black"/>
         <Text>Setting</Text>
-      </View>
-      <View style={styles.conteinerButtons}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.conteinerButtons}>
         <CircleUser size={30} color="black" />
         <Text>Contact Us</Text>
-      </View>
-      <View style={styles.conteinerButtons}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.conteinerButtons}>
         <Exit size={30} color="black" />
         <Text>Exit</Text>
-      </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }

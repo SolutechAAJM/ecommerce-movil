@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Alert,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -13,10 +12,12 @@ import stylesG from '../../../stylesG';
 import stylesAuth from './styles/stylesAuth';
 import { CircleUser, User, Lock } from '../../../Icons';
 import { authServices } from './components/Request';
+import { useNavigation } from '@react-navigation/native';
 
 function Login(): React.JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const login = async () =>{
     authServices.loginRequest({email,password})
@@ -72,7 +73,9 @@ function Login(): React.JSX.Element {
                 <Text>Forgot your account?</Text>
               </View>
               <View style={stylesAuth.vwNavLoginSignUp}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                onPress={() => navigation.navigate('Signup' as never)}
+                >
                   <Text style={stylesAuth.txtNavLoginSignUp}>Sign up</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>

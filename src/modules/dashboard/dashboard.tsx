@@ -9,9 +9,29 @@ import {
 } from 'react-native';
 import stylesG from '../../../stylesG';
 import { CartShopping, Bars } from '../../../Icons';
+import { FlatList } from 'react-native-gesture-handler';
+import CategoryItem from './components/Category';
 
-function Dashboard(): React.JSX.Element {
+interface Category {
+  id: number;
+  name: string;
+}
+
   
+  const categories: Category[] = [
+    { id: 1, name: 'Categoría 1' },
+    { id: 2, name: 'Categoría 2' },
+    { id: 3, name: 'Categoría 3' },
+    { id: 4, name: 'Categoría 3' },
+    { id: 5, name: 'Categoría 1' },
+    { id: 6, name: 'Categoría 2' },
+    // Agrega más categorías según sea necesario
+  ];
+  
+  const renderItem = ({ item }: { item: Category }) => <CategoryItem category={item} />;
+
+  function Dashboard(): React.JSX.Element {
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -29,40 +49,25 @@ function Dashboard(): React.JSX.Element {
           <View style={styles.conteinerCommon}>
             <Text>Categorias</Text>
             <View style={styles.conteinerCategories}>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Camisas</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Blusas</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Zapatos</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Trajes</Text>
-              </View>
+                <FlatList
+                    data={categories}
+                    horizontal
+                    pagingEnabled
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id.toString()}
+                />
             </View>
+            <Text>Tipos</Text>
             <View style={styles.conteinerCategories}>
-            <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Vestido</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Deportiva</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Toallas</Text>
-              </View>
-              <View style={styles.conteinerCategory}>
-                <View style={styles.ejemplo} />
-                <Text>Pantalones</Text>
-              </View>
+            <FlatList
+                    data={categories}
+                    horizontal
+                    pagingEnabled
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id.toString()}
+                />
             </View>
           </View>
           <View style={styles.conteinerCommon}>
@@ -125,5 +130,4 @@ const styles = StyleSheet.create({
     backgroundColor:'blue',
   }
 });
-
 export default Dashboard;

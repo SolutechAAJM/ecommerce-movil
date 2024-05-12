@@ -11,7 +11,7 @@ interface Category {
     category: Category;
   }
   
-  const Category: React.FC<CategoryProps> = ({ category }) => {
+  const CategoryItem: React.FC<CategoryProps> = ({ category }) => {
   return (
     <View style={styles.conteinerCategory}>
       <View style={styles.ejemplo} />
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
       }
   });
   
-  export default Category;
+  export default CategoryItem;
