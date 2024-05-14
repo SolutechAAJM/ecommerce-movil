@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,9 +8,12 @@ import {
   View,
 } from 'react-native';
 import stylesG from '../../../stylesG';
-import { CartShopping, Bars } from '../../../Icons';
-import { FlatList } from 'react-native-gesture-handler';
+import { CartShopping } from '../../../Icons';
+import { FlatList, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import CategoryItem from './components/Category';
+import Nav from '../../components/Nav';
+import ActiveNav from '../../components/ActiveNav';
+import Products from './components/Products';
 
 interface Category {
   id: number;
@@ -30,25 +33,30 @@ interface Category {
   
   const renderItem = ({ item }: { item: Category }) => <CategoryItem category={item} />;
 
-  function Dashboard(): React.JSX.Element {
-
+  function Dashboard({ route }: { route: any }): React.JSX.Element {
+    const [isActive,setIsActive]=useState(false)
+    useEffect(()=>{
+      setIsActive(route)
+    },[])
   return (
-    <SafeAreaView>
+    <TouchableWithoutFeedback onPress={() => setIsActive(false)}>
+      <SafeAreaView style={styles.vwDashboard}>
+      <Nav isActive={isActive} setIsActive={setIsActive}/>
       <ScrollView>
-        <View style={styles.conteinerPrincipal}>
-          <View style={styles.conteinerCommon}>
-            <Bars size={30} color="black" />
-            <View style={styles.conteinerSearcher}>
+        <View style={styles.vwPrincipal}>
+          <View style={styles.vwCommon}>
+            <ActiveNav setIsActive={setIsActive}/>
+            <View style={styles.vwSearcher}>
               <TextInput
-                style={styles.searcher}
+                style={styles.txtSearcher}
                 placeholder="I am looking for..."
               />
               <CartShopping size={30} color="black"/>
             </View>
           </View>
-          <View style={styles.conteinerCommon}>
+          <View style={styles.vwCommon}>
             <Text>Categorias</Text>
-            <View style={styles.conteinerCategories}>
+            <View style={styles.vwCategories}>
                 <FlatList
                     data={categories}
                     horizontal
@@ -59,8 +67,8 @@ interface Category {
                 />
             </View>
             <Text>Tipos</Text>
-            <View style={styles.conteinerCategories}>
-            <FlatList
+            <View style={styles.vwCategories}>
+                <FlatList
                     data={categories}
                     horizontal
                     pagingEnabled
@@ -70,23 +78,28 @@ interface Category {
                 />
             </View>
           </View>
-          <View style={styles.conteinerCommon}>
+          <View style={styles.vwCommon}>
             <Text>Algo mas</Text>
+            <Products />
           </View>
           </View>
       </ScrollView>
     </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
-  conteinerPrincipal: {
+  vwDashboard: {
+    height:'100%'
+  },
+  vwPrincipal: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
   },
-  conteinerCommon: {
+  vwCommon: {
     width:'90%',
     minHeight:150,
     marginTop:30,
@@ -94,35 +107,22 @@ const styles = StyleSheet.create({
     backgroundColor:stylesG.primaryColor,
     borderRadius: 20,
   },
-  conteinerSearcher:{
+  vwSearcher:{
     flex:1,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
   },
-  searcher:{
+  txtSearcher:{
     minWidth:'85%',
     backgroundColor: 'white',
     borderRadius: 20,
   },
-  conteinerCategories:{
+  vwCategories:{
     flex:1,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-  },
-  conteinerCategory:{
-    minHeight:90,
-    margin:5,
-    padding:2,
-    flex:1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    backgroundColor:stylesG.secundaryColor,
-    borderRadius: 20,
-    borderColor: 'black',
-    borderWidth: 1,
   },
   ejemplo:{
     width:30,

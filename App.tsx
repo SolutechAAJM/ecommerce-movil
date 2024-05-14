@@ -12,12 +12,12 @@ const App: React.FC = () => {
 
 return (
   <NavigationContainer>
-  <Stack.Navigator initialRouteName="Login">
-    <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-    <Stack.Screen name="Signup" component={SignUp} options={{ headerShown: false }} />
-    <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
-  </Stack.Navigator>
-</NavigationContainer>
+    <Stack.Navigator initialRouteName="Dashboard">
+      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+      <Stack.Screen name="Signup" component={SignUp} options={{ headerShown: false }} />
+      <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  </NavigationContainer>
 );
 }
 

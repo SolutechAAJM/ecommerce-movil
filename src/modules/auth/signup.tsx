@@ -33,7 +33,7 @@ function SignUp(): React.JSX.Element {
         alert(JSON.stringify(response.data.message))
     })
     .catch(error => {
-        alert(JSON.stringify(error.response.data.message))
+        alert(JSON.stringify(error.response))
     })
   }
   

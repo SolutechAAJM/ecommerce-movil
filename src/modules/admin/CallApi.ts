@@ -1,7 +1,8 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { urlBase } from "../../../config";
+import { config } from "../../../config";
 
 axios.defaults.validateStatus = () => true;
+const urlBase=config.urlBase;
 
 export const getResponse = async (url:string) =>{
     try {
