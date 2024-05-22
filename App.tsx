@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SignUp from './src/modules/auth/SignUp';
 import Dashboard from './src/modules/dashboard/Dashboard';
+import Product from './src/modules/products/Product';
 
 
 const Stack = createStackNavigator();
@@ -16,6 +17,7 @@ return (
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Signup" component={SignUp} options={{ headerShown: false }} />
       <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
+      <Stack.Screen name="Product" component={Product} options={{ headerShown: false }} />
     </Stack.Navigator>
   </NavigationContainer>
 );

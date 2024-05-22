@@ -11,7 +11,7 @@ import {
 import stylesG from '../../../stylesG';
 import stylesAuth from './styles/stylesAuth';
 import { CircleUser, User, Lock } from '../../../Icons';
-import { authServices } from './components/Request';
+import { authServices } from './utils/Request';
 import { useNavigation } from '@react-navigation/native';
 import { labels } from '../admin/labels';
 import { setIsLoggedIn } from '../admin/IsLoggedIn';
@@ -29,6 +29,9 @@ function Login(): React.JSX.Element {
         if (response.data.status === 200) {
           setIsLoggedIn(true);
           navigation.navigate('Dashboard' as never);
+        }
+        else {
+          alert(JSON.stringify(response.data.message))
         }
     })
     .catch(error => {
