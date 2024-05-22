@@ -6,55 +6,95 @@ import {
   View,
 } from 'react-native';
 import stylesG from '../../stylesG';
-import { BoxCheck, CategoryIcon, CircleUser, Exit, Gear, HouseChimney } from '../../Icons';
+import { BoxCheck, CategoryIcon, CircleUser, Exit, Gear, HouseChimney, User } from '../../Icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import { getIsLoggedIn, setIsLoggedIn } from '../modules/admin/IsLoggedIn';
 
-function Nav(): React.JSX.Element {
+interface NavProps {
+  isActive: boolean;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Nav({ isActive }: NavProps): React.JSX.Element {
+  const navigation = useNavigation();
   
   return (
-    <SafeAreaView style={styles.nav}>
-      <View style={styles.conteinerInfo}>
-      <View style={styles.ejemplo} />
-        <View>
-          <Text>Lolita Martinez</Text>
-          <Text>Lolita@gmail.com</Text>
-          <Text>Edit Profile</Text>
-        </View>
-      </View>
-      <TouchableOpacity style={styles.conteinerButtons}>
-        <HouseChimney size={30} color="black"/>
-        <Text>Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.conteinerButtons}>
-        <CategoryIcon size={30} color="black"/>
-        <Text>Category</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.conteinerButtons}>
-        <BoxCheck size={30} color="black"/>
-        <Text>Order</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.conteinerButtons}>
-        <Gear size={30} color="black"/>
-        <Text>Setting</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.conteinerButtons}>
-        <CircleUser size={30} color="black" />
-        <Text>Contact Us</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.conteinerButtons}>
-        <Exit size={30} color="black" />
-        <Text>Exit</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+        <SafeAreaView style={[styles.vwnav, isActive && styles.activeNav]}>
+          <View style={styles.conteinerInfo}>
+            <User size={50} color='black'/> 
+            {getIsLoggedIn() ? 
+            <View>
+            <Text>Lolita Martinez</Text>
+            <Text>Lolita@gmail.com</Text>
+            <Text>Edit Profile</Text>
+          </View> : 
+            <View>
+              <TouchableOpacity 
+            style={styles.conteinerButtons}
+            onPress={() => navigation.navigate('Login' as never)}
+            >
+             <Text>Login</Text>
+           </TouchableOpacity>
+           <TouchableOpacity 
+           style={styles.conteinerButtons}
+           onPress={() => navigation.navigate('Signup' as never)}
+           >
+            <Text>Signup</Text>
+          </TouchableOpacity>
+            </View>
+           }
+            
+          </View>
+          <TouchableOpacity 
+           style={styles.conteinerButtons}
+           onPress={() => navigation.navigate('Dashboard' as never)}
+           >
+            <HouseChimney size={30} color="black"/>
+            <Text>Home</Text>
+          </TouchableOpacity>
+          <View style={styles.conteinerButtons}>
+            <CategoryIcon size={30} color="black"/>
+            <Text>Category</Text>
+          </View>
+          <View style={styles.conteinerButtons}>
+            <BoxCheck size={30} color="black"/>
+            <Text>Order</Text>
+          </View>
+          <View style={styles.conteinerButtons}>
+            <Gear size={30} color="black"/>
+            <Text>Setting</Text>
+          </View>
+          <View style={styles.conteinerButtons}>
+            <CircleUser size={30} color="black" />
+            <Text>Contact Us</Text>
+          </View>
+          <TouchableOpacity 
+          style={styles.conteinerButtons}
+          onPress={()=>setIsLoggedIn(false)} 
+          >
+          <Exit size={30} color="black" />
+            <Text>Exit</Text>
+          </TouchableOpacity>
+      </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  nav:{
-    flex:1,
+  prueba:{
+    width:'65%'
+  },
+  activeNav:{
+    left:1,
+  },
+  vwnav:{
+    height:'100%',
     width:'65%',
     backgroundColor:stylesG.terceryColor,
     borderTopRightRadius: 20,
+    zIndex:2,
+    position:'absolute',
+    left:-500,
   },
   conteinerInfo: {
     padding:40,
@@ -74,11 +114,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     gap:10
-  },
-  ejemplo:{
-    width:30,
-    height:30,
-    backgroundColor:'blue',
   }
 });
 

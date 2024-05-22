@@ -11,7 +11,7 @@ import {
 import stylesG from '../../../stylesG';
 import stylesAuth from './styles/stylesAuth';
 import { User, Lock, Envelope } from '../../../Icons'; 
-import { authServices } from './components/Request';
+import { authServices } from './utils/Request';
 import { useNavigation } from '@react-navigation/native';
 
 function SignUp(): React.JSX.Element {
@@ -33,7 +33,7 @@ function SignUp(): React.JSX.Element {
         alert(JSON.stringify(response.data.message))
     })
     .catch(error => {
-        alert(JSON.stringify(error.response.data.message))
+        alert(JSON.stringify(error.response))
     })
   }
   
