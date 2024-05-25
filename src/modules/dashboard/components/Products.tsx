@@ -8,7 +8,6 @@ interface ProductProps {
     price: number,
     stock: number,
     characteristics: object,
-    images:Array<object>,
   }
 
 function Products({ props }: { props: ProductProps }): React.JSX.Element {

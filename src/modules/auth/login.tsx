@@ -30,9 +30,6 @@ function Login(): React.JSX.Element {
           setIsLoggedIn(true);
           navigation.navigate('Dashboard' as never);
         }
-        else {
-          alert(JSON.stringify(response.data.message))
-        }
     })
     .catch(error => {
         alert(JSON.stringify(error.response))
