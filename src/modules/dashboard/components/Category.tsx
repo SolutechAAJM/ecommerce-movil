@@ -1,44 +1,46 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import stylesG from '../../../../stylesG';
 
 interface Category {
-    id: number;
-    name: string;
-  }
-  
-  interface CategoryProps {
-    category: Category;
-  }
-  
-  const CategoryItem: React.FC<CategoryProps> = ({ category }) => {
+  id: number;
+  name: string;
+  urlimage: string;
+}
+
+interface CategoryProps {
+  category: Category;
+}
+
+const CategoryItem: React.FC<CategoryProps> = ({ category }) => {
   return (
-    <View style={styles.conteinerCategory}>
-      <View style={styles.ejemplo} />
+    <View style={styles.containerCategory}>
+      <Image source={{ uri: category.urlimage }} style={styles.imgPicture} />
       <Text>{category.name}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    conteinerCategory:{
-        minHeight:90,
-        margin:5,
-        padding:2,
-        flex:1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        backgroundColor:stylesG.secundaryColor,
-        borderRadius: 15,
-        borderColor: 'black',
-        borderWidth: 1,
-      },
-      ejemplo:{
-        width:30,
-        height:30,
-        backgroundColor:'blue',
-      }
-  });
-  
-  export default CategoryItem;
+  containerCategory: {
+    minHeight: 100,
+    margin: 5,
+    padding: 2,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    backgroundColor: stylesG.secundaryColor,
+    borderRadius: 15,
+    borderColor: 'black',
+    borderWidth: 1,
+  },
+  imgPicture: {
+    width: '90%',
+    height: 65,
+    borderRadius: 0,
+    resizeMode: 'cover',
+  },
+});
+
+export default CategoryItem;

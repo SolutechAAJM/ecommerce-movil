@@ -9,103 +9,165 @@ import {
 } from 'react-native';
 import stylesG from '../../../stylesG';
 import { CartShopping } from '../../../Icons';
-import { FlatList, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { FlatList, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import CategoryItem from './components/Category';
 import Nav from '../../components/Nav';
 import ActiveNav from '../../components/ActiveNav';
 import Products from './components/Products';
 import { DashServices } from './utils/Request';
+import { useNavigation } from '@react-navigation/native';
 
 interface Category {
   id: number;
   name: string;
+  urlimage: string;
+  type: string | null;
 }
-interface Product{
+
+interface Product {
   id: number;
   name: string;
-  description:string;
-  price: number,
-  stock: number,
-  characteristics: object,
+  description: string;
+  price: number;
+  stock: number;
+  characteristics: object;
+  images: string[];
 }
-  
-  const categories: Category[] = [
-    { id: 1, name: 'Categoría 1' },
-    { id: 2, name: 'Categoría 2' },
-    { id: 3, name: 'Categoría 3' },
-    { id: 4, name: 'Categoría 3' },
-    { id: 5, name: 'Categoría 1' },
-    { id: 6, name: 'Categoría 2' },
-  ];
 
-  
+function Dashboard(): React.JSX.Element {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [types, setTypes] = useState<Category[]>([]);
+  const [isActive, setIsActive] = useState(false);
+  const [dataPrecarged, setDataPrecarged] = useState({ product: false, category: false, type: false });
 
-  function Dashboard(): React.JSX.Element {
-    const [products, setProducts] = useState<Product[]>([])
-    const [isActive,setIsActive]=useState(false)
+  const navigation = useNavigation();
 
-    const renderItem = ({ item }: { item: Category }) => <CategoryItem category={item} />;
-    const renderProduct= ({ item }: { item: Product; })=><Products props={item} />;
-    const product = async () =>{
-      DashServices.productsRequest()
-        .then(response => {
-          if (response.data.status === 200) {
-            setProducts(response.data.body)
-          }
+  const renderItem = ({ item }: { item: Category }) => (
+    <TouchableOpacity onPress={() => navigation.navigate('CategoryProducts', { method: item.type})}>
+      <CategoryItem category={item} />
+    </TouchableOpacity>
+  );
+
+  const renderProduct = ({ item }: { item: Product }) => <Products props={item} />;
+
+  const product = async () => {
+    DashServices.productsRequest()
+      .then(response => {
+        if (response.data.status === 200) {
+          setProducts(response.data.body);
+        }
       })
       .catch(error => {
-          alert(JSON.stringify(error.response))
+        alert(JSON.stringify(error.response));
+      });
+  };
+
+  const getCategories = async () => {
+    DashServices.getCategoriesRequest()
+      .then(response => {
+        if (response.data.status === 200) {
+
+          let categories = response.data.body;
+
+          categories.forEach((category:any) => {
+            category.type = 'type';
+          });
+          setCategories(categories);
+        }
       })
+      .catch(error => {
+        alert(JSON.stringify(error.response));
+      });
+  };
+
+  const getTypes = async () => {
+    DashServices.getTypesRequest()
+      .then(response => {
+        if (response.data.status === 200) {
+          let types = response.data.body;
+
+          types.forEach((type:any) => {
+            type.type = 'type';
+          });
+
+          setTypes(types);
+        }
+      })
+      .catch(error => {
+        alert(JSON.stringify(error.response));
+      });
+  };
+
+  useEffect(() => {
+    if (!dataPrecarged.product) {
+      product();
+      setDataPrecarged(prevState => ({
+        ...prevState,
+        product: true
+      }));
     }
 
+    if (!dataPrecarged.category) {
+      getCategories();
+      setDataPrecarged(prevState => ({
+        ...prevState,
+        category: true
+      }));
+    }
 
-    useEffect(()=>{
-      product()
-    },[])
-    
-    return (
-      <TouchableWithoutFeedback onPress={() => setIsActive(false)}>
-        <SafeAreaView style={styles.vwDashboard}>
-        <Nav isActive={isActive} setIsActive={setIsActive}/>
+    if (!dataPrecarged.type) {
+      getTypes();
+      setDataPrecarged(prevState => ({
+        ...prevState,
+        type: true
+      }));
+    }
+  }, []);
+
+  return (
+    <TouchableWithoutFeedback onPress={() => setIsActive(false)}>
+      <SafeAreaView style={styles.vwDashboard}>
+        <Nav isActive={isActive} setIsActive={setIsActive} />
         <ScrollView>
           <View style={styles.vwPrincipal}>
             <View style={styles.vwCommon}>
-              <ActiveNav setIsActive={setIsActive}/>
+              <ActiveNav setIsActive={setIsActive} />
               <View style={styles.vwSearcher}>
                 <TextInput
                   style={styles.txtSearcher}
                   placeholder="I am looking for..."
                 />
-                <CartShopping size={30} color="black"/>
+                <CartShopping size={30} color="black" />
               </View>
             </View>
             <View style={styles.vwCommon}>
               <Text>Categorias</Text>
               <View style={styles.vwCategories}>
-                  <FlatList
-                      data={categories}
-                      horizontal
-                      pagingEnabled
-                      showsHorizontalScrollIndicator={false}
-                      renderItem={renderItem}
-                      keyExtractor={(item) => item.id.toString()}
-                  />
+                <FlatList
+                  data={categories}
+                  horizontal
+                  pagingEnabled
+                  showsHorizontalScrollIndicator={false}
+                  renderItem={renderItem}
+                  keyExtractor={(item) => item.id.toString()}
+                />
               </View>
-              <Text>Tipos</Text>
-              <View style={styles.vwCategories}>
-                  <FlatList
-                      data={categories}
-                      horizontal
-                      pagingEnabled
-                      showsHorizontalScrollIndicator={false}
-                      renderItem={renderItem}
-                      keyExtractor={(item) => item.id.toString()}
-                  />
+              <Text style={styles.textType}>Tipos</Text>
+              <View style={styles.vwTypes}>
+                <FlatList
+                  data={types}
+                  horizontal
+                  pagingEnabled
+                  showsHorizontalScrollIndicator={false}
+                  renderItem={renderItem}
+                  keyExtractor={(item) => item.id.toString()}
+                />
               </View>
             </View>
             <View style={styles.vwCommon}>
               <Text>Algo mas</Text>
-              <FlatList 
+              <FlatList
                 data={products}
                 horizontal
                 pagingEnabled
@@ -113,16 +175,16 @@ interface Product{
                 keyExtractor={(productItem) => productItem.id.toString()}
               />
             </View>
-            </View>
+          </View>
         </ScrollView>
       </SafeAreaView>
-      </TouchableWithoutFeedback>
-    );
+    </TouchableWithoutFeedback>
+  );
 }
 
 const styles = StyleSheet.create({
   vwDashboard: {
-    height:'100%'
+    height: '100%'
   },
   vwPrincipal: {
     flex: 1,
@@ -131,34 +193,44 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   vwCommon: {
-    width:'90%',
-    minHeight:150,
-    marginTop:30,
-    padding:6,
-    backgroundColor:stylesG.primaryColor,
-    borderRadius: 20,
+    width: '96%',
+    minHeight: 150,
+    marginTop: 30,
+    padding: 6,
+    backgroundColor: stylesG.primaryColor,
+    borderRadius: 16,
   },
-  vwSearcher:{
-    flex:1,
+  vwSearcher: {
+    flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
   },
-  txtSearcher:{
-    minWidth:'85%',
+  txtSearcher: {
+    minWidth: '85%',
     backgroundColor: 'white',
     borderRadius: 20,
   },
-  vwCategories:{
-    flex:1,
+  vwCategories: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
   },
-  ejemplo:{
-    width:30,
-    height:30,
-    backgroundColor:'blue',
+  vwTypes: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  textType: {
+    marginTop: 10
+  },
+  ejemplo: {
+    width: 30,
+    height: 30,
+    backgroundColor: 'blue',
   }
 });
+
 export default Dashboard;
