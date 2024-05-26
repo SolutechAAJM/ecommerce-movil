@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaView, Image } from 'react-native';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import Nav from '../../components/Nav';
-import ActiveNav from '../../components/ActiveNav';
+import { View, Text, StyleSheet, FlatList, SafeAreaView, Image, Button } from 'react-native';
+import { RouteProp, useRoute, useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../../../App'; 
+
 interface ImageI {
   id: number;
   url: string;
@@ -24,53 +23,58 @@ interface ProductsByRouteParams {
 type ProductsByRouteProp = RouteProp<{ ProductBy: ProductsByRouteParams }, 'ProductBy'>;
 
 const ProductsBy: React.FC = () => {
-
-  const [isActive, setIsActive] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   const route = useRoute<ProductsByRouteProp>();
   const { name, products } = route.params;
 
-  console.log(JSON.stringify(products))
+  console.log(JSON.stringify(products));
+
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+      if (isRedirecting) return;
+
+      // Prevenir el comportamiento por defecto
+      e.preventDefault();
+
+      // Prevenir recursión
+      setIsRedirecting(true);
+
+      // Navegar a Dashboard
+      navigation.navigate('Dashboard');
+    });
+
+    return unsubscribe;
+  }, [navigation, isRedirecting]);
 
   const renderProductItem = ({ item }: { item: Product }) => (
     <View style={styles.productItem}>
-
-      {/* <Text>Aguapanrl</Text> */}
-      <FlatList
-        data={item.images}
-        renderItem={({ item: image }) => (
-          <Image source={{ uri: image.url }} style={styles.productImage} />
-        )}
-        keyExtractor={(image) => image.id.toString()}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-      />
+      <Image source={{ uri: item.images[0]?.url }} style={styles.productImage} />
       <Text style={styles.productName}>{item.name}</Text>
       <Text style={styles.productPrice}>${item.price}</Text>
+      <View style={styles.buttonContainer}>
+        <View style={styles.buttonWrapper}>
+          <Button title="Añadir al carrito" onPress={() => {}} />
+        </View>
+        <View style={styles.buttonWrapper}>
+          <Button title="Ver" onPress={() => { }} />
+        </View>
+      </View>
     </View>
   );
 
   return (
-    // <TouchableWithoutFeedback onPress={() => setIsActive(false)}>
-      <SafeAreaView style={styles.container}>
-        {/* <Nav isActive={isActive} setIsActive={setIsActive} /> */}
-        {/* <ActiveNav setIsActive={setIsActive} /> */}
-
-        <Text style={styles.title}>{name}</Text>
-        <FlatList
-          data={products}
-          renderItem={renderProductItem}
-          keyExtractor={(item) => item.id.toString()}
-          // numColumns={2}
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-
-          contentContainerStyle={styles.productList}
-        />
-      </SafeAreaView>
-    // </TouchableWithoutFeedback>
-
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>{name}</Text>
+      <FlatList
+        data={products}
+        renderItem={renderProductItem}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.productList}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -91,7 +95,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   productItem: {
-    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     margin: 8,
@@ -101,7 +104,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   productImage: {
-    width: 150,
+    width: 300,  
     height: 150,
     borderRadius: 8,
   },
@@ -114,6 +117,14 @@ const styles = StyleSheet.create({
     marginTop: 4,
     fontSize: 14,
     color: 'gray',
+  },
+  buttonContainer: {
+    flexDirection: 'column',  
+    width: '85%',
+    marginTop: 8,
+  },
+  buttonWrapper: {
+    marginVertical: 4, 
   },
 });
 

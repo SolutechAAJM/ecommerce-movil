@@ -30,8 +30,8 @@ const App: React.FC = () => {
         <Stack.Screen name="Signup" component={SignUp} options={{ headerShown: false }} />
         <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
         <Stack.Screen name="Product" component={Product} options={{ headerShown: false }} />
-        <Stack.Screen name="ProductBy" component={ProductsBy} options={{ headerShown: false }} />
-        <Stack.Screen name="CategoryProducts" component={CategoryProducts} options={{ headerShown: true }} />
+        <Stack.Screen name="ProductBy" component={ProductsBy} options={{ headerShown: true }} />
+        <Stack.Screen name="CategoryProducts" component={CategoryProducts} options={{ headerShown: false }} />
         <Stack.Screen name="ContactUs" component={ContactUs} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
