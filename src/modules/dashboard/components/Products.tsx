@@ -14,7 +14,7 @@ interface ProductProps {
   }
 
 function Products({ props }: { props: ProductProps }): React.JSX.Element {
-    const url=props.images[1].url;
+    const url=props.images[0].url;
     return (
         <View style={style.vwProduct}>
         <Image source={{ uri:url}} style={style.imgPicture}></Image>
