@@ -3460,6 +3460,11 @@
   "resolved" "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz"
   "version" "4.0.0"
 
+"escape-string-regexp@2.0.0":
+  "integrity" "sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w=="
+  "resolved" "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz"
+  "version" "2.0.0"
+
 "eslint-config-prettier@^8.5.0":
   "integrity" "sha512-SM8AMJdeQqRYT9O9zguiruQZaN7+z+E4eAP9oiLNGKMtomwaB1E9dcgUD6ZAn/eQAb52USbvezbiljfZUhbJcg=="
   "resolved" "https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-8.10.0.tgz"
@@ -4188,7 +4193,7 @@
     "hasown" "^2.0.0"
     "side-channel" "^1.0.4"
 
-"invariant@^2.2.4":
+"invariant@^2.2.4", "invariant@2.2.4":
   "integrity" "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA=="
   "resolved" "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   "version" "2.2.4"
@@ -6052,6 +6057,14 @@
   dependencies:
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
+
+"react-native-webview@^13.10.2":
+  "integrity" "sha512-rjrTuPBtpHbI3owoyvSR+bRJqHfsdo5V3nVfU+G65CotkSLewEcGfA9cq7Qv3nzm5t0KEDIt0G/n7hQFjsXihQ=="
+  "resolved" "https://registry.npmjs.org/react-native-webview/-/react-native-webview-13.10.2.tgz"
+  "version" "13.10.2"
+  dependencies:
+    "escape-string-regexp" "2.0.0"
+    "invariant" "2.2.4"
 
 "react-native@*", "react-native@^0.74.0":
   "integrity" "sha512-Vpp9WPmkCm4TUH5YDxwQhqktGVon/yLpjbTgjgLqup3GglOgWagYCX3MlmK1iksIcqtyMJHMEWa+UEzJ3G9T8w=="

@@ -27,6 +27,7 @@ interface Product{
   price: number,
   stock: number,
   characteristics: object,
+  images:Image[],
 }
   
   const categories: Category[] = [
@@ -107,7 +108,6 @@ interface Product{
               <Text>Algo mas</Text>
               <FlatList 
                 data={products}
-                horizontal
                 pagingEnabled
                 renderItem={renderProduct}
                 keyExtractor={(productItem) => productItem.id.toString()}

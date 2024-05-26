@@ -1,5 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import stylesG from '../../../../stylesG';
 
 interface ProductProps {
     id: number;
@@ -8,16 +10,20 @@ interface ProductProps {
     price: number,
     stock: number,
     characteristics: object,
+    images:Image[],
   }
 
 function Products({ props }: { props: ProductProps }): React.JSX.Element {
-    const url="https://drive.google.com/uc?export=view&id=1SVL2FaTk0SdUhjoF39GC3yWysp5Az99L";
+    const url=props.images[1].url;
     return (
         <View style={style.vwProduct}>
         <Image source={{ uri:url}} style={style.imgPicture}></Image>
-        <View style={style.vwInfo}>
-            <Text style={style.txtTitle}>{props.name}</Text>
-            <Text style={style.txtInfo}>{props.description}</Text>
+        <Text style={style.txtTitle}>{props.name}</Text>
+        <View style={style.vwPriceCart}>
+            <Text style={style.txtPrice}>${props.price}</Text>
+            <TouchableOpacity>
+                <Text style={style.txtCart}>+</Text>
+            </TouchableOpacity>
         </View>
       </View>
     )
@@ -25,30 +31,39 @@ function Products({ props }: { props: ProductProps }): React.JSX.Element {
 
 const style = StyleSheet.create({
     vwProduct:{
+        width:'50%',
         marginTop:5,
         marginBottom:5,
-        flexDirection:'row',
+        flexDirection:'column',
         alignItems:'center',
         justifyContent:'center',
         gap:5,
     },
     imgPicture:{
-        width:'60%',
-        height:200,
+        width:'100%',
+        height:180,
         borderRadius:20,
     },
-    vwInfo:{
-        width:'40%',
-        gap:10,
-    },
     txtTitle:{
-        fontSize:22,
-        color:'red',
+        fontSize:30,
+        color:'black',
         textAlign:'center',
     },
-    txtInfo:{
-        textAlign:'center'
+    vwPriceCart:{
+        width:'100%',
+        justifyContent:'space-between',
+        alignItems:'center',
+        flexDirection:'row',
+    },
+    txtPrice:{
+        fontSize:24,
+        color:'black'
+    },
+    tOCart:{
 
     },
+    txtCart:{
+        fontSize:40,
+    }
 })
 export default Products

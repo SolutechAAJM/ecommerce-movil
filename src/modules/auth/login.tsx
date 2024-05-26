@@ -86,7 +86,7 @@ function Login(): React.JSX.Element {
                   <Text style={stylesAuth.txtNavLoginSignUp}>Sign up</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Text style={stylesAuth.txtNavLoginSignUp}>Login</Text>
+                  <Text style={[stylesAuth.txtNavLoginSignUp, stylesAuth.oTScreen]}>Login</Text>
                 </TouchableOpacity>
               </View>
             </View>
