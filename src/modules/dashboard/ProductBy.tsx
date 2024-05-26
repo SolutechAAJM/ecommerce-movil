@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, SafeAreaView, Image } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import Nav from '../../components/Nav';
+import ActiveNav from '../../components/ActiveNav';
+interface ImageI {
+  id: number;
+  url: string;
+}
 
 interface Product {
   id: number;
   name: string;
   price: number;
-  images: string[];
+  images: ImageI[];
 }
 
 interface ProductsByRouteParams {
@@ -18,17 +24,24 @@ interface ProductsByRouteParams {
 type ProductsByRouteProp = RouteProp<{ ProductBy: ProductsByRouteParams }, 'ProductBy'>;
 
 const ProductsBy: React.FC = () => {
+
+  const [isActive, setIsActive] = useState(false);
+
   const route = useRoute<ProductsByRouteProp>();
   const { name, products } = route.params;
 
+  console.log(JSON.stringify(products))
+
   const renderProductItem = ({ item }: { item: Product }) => (
     <View style={styles.productItem}>
+
+      {/* <Text>Aguapanrl</Text> */}
       <FlatList
         data={item.images}
         renderItem={({ item: image }) => (
-          <Image source={{ uri: image }} style={styles.productImage} />
+          <Image source={{ uri: image.url }} style={styles.productImage} />
         )}
-        keyExtractor={(image, index) => index.toString()}
+        keyExtractor={(image) => image.id.toString()}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
@@ -39,16 +52,25 @@ const ProductsBy: React.FC = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Productos by {name}</Text>
-      <FlatList
-        data={products}
-        renderItem={renderProductItem}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        contentContainerStyle={styles.productList}
-      />
-    </SafeAreaView>
+    // <TouchableWithoutFeedback onPress={() => setIsActive(false)}>
+      <SafeAreaView style={styles.container}>
+        {/* <Nav isActive={isActive} setIsActive={setIsActive} /> */}
+        {/* <ActiveNav setIsActive={setIsActive} /> */}
+
+        <Text style={styles.title}>{name}</Text>
+        <FlatList
+          data={products}
+          renderItem={renderProductItem}
+          keyExtractor={(item) => item.id.toString()}
+          // numColumns={2}
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+
+          contentContainerStyle={styles.productList}
+        />
+      </SafeAreaView>
+    // </TouchableWithoutFeedback>
+
   );
 };
 
@@ -58,6 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingHorizontal: 16,
     paddingTop: 16,
+    height: '100%',
   },
   title: {
     fontSize: 24,

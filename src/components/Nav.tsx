@@ -36,12 +36,6 @@ function Nav({ isActive }: NavProps): React.JSX.Element {
             >
              <Text>Login</Text>
            </TouchableOpacity>
-           <TouchableOpacity 
-           style={styles.conteinerButtons}
-           onPress={() => navigation.navigate('Signup' as never)}
-           >
-            <Text>Signup</Text>
-          </TouchableOpacity>
             </View>
            }
             
@@ -61,14 +55,16 @@ function Nav({ isActive }: NavProps): React.JSX.Element {
             <BoxCheck size={30} color="black"/>
             <Text>Order</Text>
           </View>
-          <View style={styles.conteinerButtons}>
+          {/* <View style={styles.conteinerButtons}>
             <Gear size={30} color="black"/>
             <Text>Setting</Text>
-          </View>
-          <View style={styles.conteinerButtons}>
+          </View> */}
+          <TouchableOpacity 
+          style={styles.conteinerButtons}
+          onPress={() => navigation.navigate('ContactUs' as never)}>
             <CircleUser size={30} color="black" />
             <Text>Contact Us</Text>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity 
           style={styles.conteinerButtons}
           onPress={()=>setIsLoggedIn(false)} 

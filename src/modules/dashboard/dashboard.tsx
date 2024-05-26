@@ -73,9 +73,7 @@ function Dashboard(): React.JSX.Element {
     DashServices.getCategoriesRequest()
       .then(response => {
         if (response.data.status === 200) {
-
           let categories = response.data.body;
-
           categories.forEach((category:any) => {
             category.type = 'category';
           });
@@ -175,7 +173,6 @@ function Dashboard(): React.JSX.Element {
               <Text>Algo mas</Text>
               <FlatList
                 data={products}
-                horizontal
                 pagingEnabled
                 renderItem={renderProduct}
                 keyExtractor={(productItem) => productItem.id.toString()}

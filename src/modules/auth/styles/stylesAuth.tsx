@@ -12,6 +12,7 @@ export interface AuthStyles {
   oTLoginSignUp: ViewStyle;
   vwNavLoginSignUp: ViewStyle;
   txtNavLoginSignUp: TextStyle;
+  oTScreen:ViewStyle;
 }
 const stylesAuth: AuthStyles = {
     vwDecoration:{
@@ -88,5 +89,9 @@ const stylesAuth: AuthStyles = {
         color:'white',
         fontSize:22,
     },
+    oTScreen:{
+        borderColor:'white',
+        borderBottomWidth:4
+    }
 }
 export default stylesAuth;

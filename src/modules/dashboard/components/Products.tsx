@@ -1,54 +1,72 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import stylesG from '../../../../stylesG';
 
+interface img{
+    url: string
+}
 interface ProductProps {
     id: number;
     name: string;
-    description: string;
+    description:string;
     price: number,
     stock: number,
     characteristics: object,
-}
+    images:img[],
+  }
 
-function Products({ props }: { props: ProductProps }): React.JSX.Element {
-    const url = "https://drive.google.com/uc?export=view&id=1SVL2FaTk0SdUhjoF39GC3yWysp5Az99L";
+export function Products({ props }: { props: ProductProps }): React.JSX.Element {
+    const url=props.images[1].url;
     return (
         <View style={style.vwProduct}>
-            <Image source={{ uri: url }} style={style.imgPicture}></Image>
-            <View style={style.vwInfo}>
-                <Text style={style.txtTitle}>{props.name}</Text>
-                <Text style={style.txtInfo}>{props.description}</Text>
-            </View>
+        <Image source={{ uri:url}} style={style.imgPicture}></Image>
+        <Text style={style.txtTitle}>{props.name}</Text>
+        <View style={style.vwPriceCart}>
+            <Text style={style.txtPrice}>${props.price}</Text>
+            <TouchableOpacity>
+                <Text style={style.txtCart}>+</Text>
+            </TouchableOpacity>
         </View>
+      </View>
     )
 }
 
 const style = StyleSheet.create({
-    vwProduct: {
-        marginTop: 5,
-        marginBottom: 5,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 5,
+    vwProduct:{
+        width:'50%',
+        marginTop:5,
+        marginBottom:5,
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center',
+        gap:5,
     },
-    imgPicture: {
-        width: '60%',
-        height: 200,
-        borderRadius: 20,
+    imgPicture:{
+        width:'100%',
+        height:180,
+        borderRadius:20,
     },
-    vwInfo: {
-        width: '40%',
-        gap: 10,
+    txtTitle:{
+        fontSize:30,
+        color:'black',
+        textAlign:'center',
     },
-    txtTitle: {
-        fontSize: 22,
-        color: 'red',
-        textAlign: 'center',
+    vwPriceCart:{
+        width:'100%',
+        justifyContent:'space-between',
+        alignItems:'center',
+        flexDirection:'row',
     },
-    txtInfo: {
-        textAlign: 'center'
+    txtPrice:{
+        fontSize:24,
+        color:'black'
+    },
+    tOCart:{
 
     },
+    txtCart:{
+        fontSize:40,
+    }
 })
 export default Products

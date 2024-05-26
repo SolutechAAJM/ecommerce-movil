@@ -92,7 +92,7 @@ function SignUp(): React.JSX.Element {
               </View>
               <View style={stylesAuth.vwNavLoginSignUp}>
                 <TouchableOpacity>
-                  <Text style={stylesAuth.txtNavLoginSignUp}>Sign up</Text>
+                  <Text style={[stylesAuth.txtNavLoginSignUp, stylesAuth.oTScreen]}>Sign up</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Login' as never)}>
                   <Text style={stylesAuth.txtNavLoginSignUp}>Login</Text>

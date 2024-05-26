@@ -7,19 +7,22 @@ import Product from './src/modules/products/Product';
 import Login from './src/modules/auth/login';
 import ProductsBy from './src/modules/dashboard/ProductBy';
 import CategoryProducts from './src/modules/dashboard/CategoryProducts';
+import ContactUs from './src/modules/common/ContactUs';
 
 export type RootStackParamList = {
   Login: undefined;
   Signup: undefined;
   Dashboard: undefined;
   Product: undefined;
-  ProductBy: { name: string ; products: any[] };
-  CategoryProducts: { method: any; id: number, name: string} ;
+  ContactUs: undefined;
+  ProductBy: { name: string; products: any[] };
+  CategoryProducts: { method: any; id: number, name: string };
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 const App: React.FC = () => {
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Dashboard">
@@ -29,6 +32,7 @@ const App: React.FC = () => {
         <Stack.Screen name="Product" component={Product} options={{ headerShown: false }} />
         <Stack.Screen name="ProductBy" component={ProductsBy} options={{ headerShown: false }} />
         <Stack.Screen name="CategoryProducts" component={CategoryProducts} options={{ headerShown: true }} />
+        <Stack.Screen name="ContactUs" component={ContactUs} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
