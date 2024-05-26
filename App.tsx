@@ -8,13 +8,13 @@ import Login from './src/modules/auth/login';
 import ProductsBy from './src/modules/dashboard/ProductBy';
 import CategoryProducts from './src/modules/dashboard/CategoryProducts';
 
-type RootStackParamList = {
+export type RootStackParamList = {
   Login: undefined;
   Signup: undefined;
   Dashboard: undefined;
   Product: undefined;
-  ProductBy: { name: string; products: any[] };
-  CategoryProducts: { method: string;} ;
+  ProductBy: { name: string ; products: any[] };
+  CategoryProducts: { method: any; id: number, name: string} ;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -28,7 +28,7 @@ const App: React.FC = () => {
         <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
         <Stack.Screen name="Product" component={Product} options={{ headerShown: false }} />
         <Stack.Screen name="ProductBy" component={ProductsBy} options={{ headerShown: false }} />
-        <Stack.Screen name="CategoryProducts" component={CategoryProducts} options={{ headerShown: false }} />
+        <Stack.Screen name="CategoryProducts" component={CategoryProducts} options={{ headerShown: true }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

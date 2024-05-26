@@ -16,7 +16,8 @@ import ActiveNav from '../../components/ActiveNav';
 import Products from './components/Products';
 import { DashServices } from './utils/Request';
 import { useNavigation } from '@react-navigation/native';
-
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../App';
 interface Category {
   id: number;
   name: string;
@@ -34,6 +35,11 @@ interface Product {
   images: string[];
 }
 
+type CategoryProductsScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'CategoryProducts'
+>
+
 function Dashboard(): React.JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -41,10 +47,10 @@ function Dashboard(): React.JSX.Element {
   const [isActive, setIsActive] = useState(false);
   const [dataPrecarged, setDataPrecarged] = useState({ product: false, category: false, type: false });
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<CategoryProductsScreenNavigationProp>();
 
   const renderItem = ({ item }: { item: Category }) => (
-    <TouchableOpacity onPress={() => navigation.navigate('CategoryProducts', { method: item.type})}>
+    <TouchableOpacity onPress={() => navigation.navigate('CategoryProducts', { method: item.type, id: item.id, name: item.name})}>
       <CategoryItem category={item} />
     </TouchableOpacity>
   );
@@ -71,7 +77,7 @@ function Dashboard(): React.JSX.Element {
           let categories = response.data.body;
 
           categories.forEach((category:any) => {
-            category.type = 'type';
+            category.type = 'category';
           });
           setCategories(categories);
         }
