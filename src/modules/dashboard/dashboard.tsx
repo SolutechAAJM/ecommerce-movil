@@ -55,7 +55,11 @@ function Dashboard(): React.JSX.Element {
     </TouchableOpacity>
   );
 
-  const renderProduct = ({ item }: { item: Product }) => <Products props={item} />;
+  const renderProduct = ({ item }: { item: Product }) => (
+    <TouchableOpacity onPress={() => navigation.navigate('Product', {id: item.id})}>
+      <Products props={item} />
+    </TouchableOpacity>
+  );
 
   const product = async () => {
     DashServices.productsRequest()

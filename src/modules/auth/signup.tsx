@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     textAlign:'center',
     borderRadius:50,
     fontSize:30,
-    color:'white',
+    color:'black',
   }
 });
 

@@ -86,11 +86,11 @@ const stylesAuth: AuthStyles = {
         gap:50,
     },
     txtNavLoginSignUp:{
-        color:'white',
+        color:'black',
         fontSize:22,
     },
     oTScreen:{
-        borderColor:'white',
+        borderColor:'black',
         borderBottomWidth:4
     }
 }

@@ -9,13 +9,15 @@ import ProductsBy from './src/modules/dashboard/ProductBy';
 import CategoryProducts from './src/modules/dashboard/CategoryProducts';
 import ContactUs from './src/modules/common/ContactUs';
 import ShoppingCart from './src/modules/shoppingcart/shoppingcart';
+import Orders from './src/modules/ordes/Orders';
 
 export type RootStackParamList = {
   Login: undefined;
   Signup: undefined;
   Dashboard: undefined;
-  Product: undefined;
+  Product: {id: number};
   ContactUs: undefined;
+  Order:undefined;
   ProductBy: { name: string; products: any[] };
   CategoryProducts: { method: any; id: number, name: string };
   ShoppingCart: undefined;
@@ -35,7 +37,8 @@ const App: React.FC = () => {
         <Stack.Screen name="ProductBy" component={ProductsBy} options={{ headerShown: true }} />
         <Stack.Screen name="CategoryProducts" component={CategoryProducts} options={{ headerShown: false }} />
         <Stack.Screen name="ContactUs" component={ContactUs} options={{ headerShown: false }} />
-        <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{ headerShown: true }} />
+        <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{ headerShown: false }} />
+        <Stack.Screen name="Order" component={Orders} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   ); 

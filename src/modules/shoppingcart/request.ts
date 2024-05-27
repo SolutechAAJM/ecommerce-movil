@@ -11,4 +11,9 @@ export const ShopServices = {
         return response
     },
 
+    async deleteCart (data: any) {
+        const response:any = await postResponse('shoppingcart/deleteitem', data)
+        return response
+    },
+
 }

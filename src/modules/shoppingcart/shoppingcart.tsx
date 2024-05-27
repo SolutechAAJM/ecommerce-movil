@@ -111,7 +111,17 @@ const ShoppingCart: React.FC = () => {
     );
   };
 
-  const removeProduct = (productId: number) => {
+  const removeProduct = (productId: number, idcart:number) => {
+    ShopServices.deleteCart({"id": idcart})
+    .then((response)=>{
+      if(response.data.status != 200){
+        alert("Ocurrió un error al eliminar el producto");
+      }
+    })
+    .catch(error=>{
+      alert("Ocurrió un error al eliminar el producto");
+    })
+    
     setCartProducts(prevProducts => prevProducts.filter(product => product.id !== productId));
   };
 
@@ -133,7 +143,7 @@ const ShoppingCart: React.FC = () => {
           <Text style={styles.quantityButtonText}>+</Text>
         </TouchableOpacity>
       </View>
-      <Button title="Eliminar" onPress={() => removeProduct(item.id)} />
+      <Button title="Eliminar" onPress={() => removeProduct(item.id, item.idcart)} />
     </View>
   );
 
@@ -147,9 +157,11 @@ const ShoppingCart: React.FC = () => {
         contentContainerStyle={styles.productList}
       />
       <View style={styles.totalContainer}>
-
         <Text style={styles.totalText}>Precio Total: ${getTotalPrice()}</Text>
       </View>
+      <TouchableOpacity onPress={()=>{}} style={styles.totalContainer}>
+          <Text style={styles.quantityButtonText}>Finalizar Compra</Text>
+        </TouchableOpacity>
     </SafeAreaView>
   );
 };
