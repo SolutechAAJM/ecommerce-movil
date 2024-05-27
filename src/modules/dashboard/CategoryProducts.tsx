@@ -54,6 +54,7 @@ const CategoryProducts: React.FC = () => {
     DashServices.getProductsBy(dataProp)
       .then(response => {
         if (response.data.status == 201) {
+          console.log(response)
           setProducts(response.data.body);
           navigation.navigate('ProductBy', { name: typeName, products: response.data.body });
         }

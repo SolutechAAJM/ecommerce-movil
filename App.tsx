@@ -10,6 +10,7 @@ import CategoryProducts from './src/modules/dashboard/CategoryProducts';
 import ContactUs from './src/modules/common/ContactUs';
 import ShoppingCart from './src/modules/shoppingcart/shoppingcart';
 import Orders from './src/modules/ordes/Orders';
+import OrderFinally from './src/modules/ordes/orderFinally';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -21,6 +22,7 @@ export type RootStackParamList = {
   ProductBy: { name: string; products: any[] };
   CategoryProducts: { method: any; id: number, name: string };
   ShoppingCart: undefined;
+  OrderFinally: {products:any}
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -39,6 +41,7 @@ const App: React.FC = () => {
         <Stack.Screen name="ContactUs" component={ContactUs} options={{ headerShown: false }} />
         <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{ headerShown: false }} />
         <Stack.Screen name="Order" component={Orders} options={{ headerShown: false }} />
+        <Stack.Screen name="OrderFinally" component={OrderFinally} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   ); 

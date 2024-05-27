@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, SafeAreaView, Image, Button, TouchableOpacity } from 'react-native';
 import { getStorageData } from '../common/localstorage';
 import { ShopServices } from './request';
+import { useNavigation,  RouteProp, useRoute, } from '@react-navigation/native';
+import { RootStackParamList } from '../../../App';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 interface ImageI {
   id: number;
@@ -24,9 +27,24 @@ interface CartProduct {
   images?: ImageI[];
 }
 
+
+interface CategoryProductsRouteParams {
+  method: string;
+  id: number;
+  name: string;
+}
+
+type CategoryProductsRouteProp = RouteProp<{ CategoryProducts: CategoryProductsRouteParams }, 'CategoryProducts'>;
+type NavigationProp = StackNavigationProp<RootStackParamList, 'CategoryProducts'>;
+
+
+
 const ShoppingCart: React.FC = () => {
   const [load, setLoad] = useState(false);
   const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
+
+  const route = useRoute<CategoryProductsRouteProp>();
+  const navigation = useNavigation<NavigationProp>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -125,6 +143,13 @@ const ShoppingCart: React.FC = () => {
     setCartProducts(prevProducts => prevProducts.filter(product => product.id !== productId));
   };
 
+
+  const onCreateOrder = () => {
+    console.log("navegando")
+    navigation.navigate('OrderFinally', {products: cartProducts})
+  }
+
+
   const getTotalPrice = () => {
     return cartProducts.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
   };
@@ -159,7 +184,7 @@ const ShoppingCart: React.FC = () => {
       <View style={styles.totalContainer}>
         <Text style={styles.totalText}>Precio Total: ${getTotalPrice()}</Text>
       </View>
-      <TouchableOpacity onPress={()=>{}} style={styles.totalContainer}>
+      <TouchableOpacity onPress={()=>{onCreateOrder}} style={styles.totalContainer}>
           <Text style={styles.quantityButtonText}>Finalizar Compra</Text>
         </TouchableOpacity>
     </SafeAreaView>
