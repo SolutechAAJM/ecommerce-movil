@@ -18,7 +18,7 @@ export type RootStackParamList = {
   ContactUs: undefined;
   ProductBy: { name: string; products: any[] };
   CategoryProducts: { method: any; id: number, name: string };
-  ShoppingCart: { products: any[] };
+  ShoppingCart: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();

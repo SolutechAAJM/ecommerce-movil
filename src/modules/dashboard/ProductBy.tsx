@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, SafeAreaView, Image, Button } from 'react-native';
 import { RouteProp, useRoute, useNavigation, NavigationProp } from '@react-navigation/native';
-import { RootStackParamList } from '../../../App'; 
+import { RootStackParamList } from '../../../App';
+import { getStorageData } from '../common/localstorage';
+
+import { DashServices } from './utils/Request';
+
+import { AddItemToCartItem } from './utils/addProductToCart';
 
 interface ImageI {
   id: number;
@@ -32,17 +37,15 @@ const ProductsBy: React.FC = () => {
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
+  const addItemToCartItem = (uno: number, dos:number) =>{
+    AddItemToCartItem(uno, dos)
+  }
+
   useEffect(() => {
     const unsubscribe = navigation.addListener('beforeRemove', (e) => {
       if (isRedirecting) return;
-
-      // Prevenir el comportamiento por defecto
       e.preventDefault();
-
-      // Prevenir recursión
       setIsRedirecting(true);
-
-      // Navegar a Dashboard
       navigation.navigate('Dashboard');
     });
 
@@ -56,7 +59,7 @@ const ProductsBy: React.FC = () => {
       <Text style={styles.productPrice}>${item.price}</Text>
       <View style={styles.buttonContainer}>
         <View style={styles.buttonWrapper}>
-          <Button title="Añadir al carrito" onPress={() => {}} />
+          <Button title="Añadir al carrito" onPress={() => {addItemToCartItem(item.id, 1) }} />
         </View>
         <View style={styles.buttonWrapper}>
           <Button title="Ver" onPress={() => { }} />
@@ -64,6 +67,38 @@ const ProductsBy: React.FC = () => {
       </View>
     </View>
   );
+
+  const AddItemToCartItem = async (productId: number, quantity: number) => {
+    let idUser: any = await getStorageData("iduser");
+
+    if(idUser == null){
+      alert("Debe loguearse en la aplicación")
+      return
+    }
+
+    idUser = parseInt(idUser);
+
+    let data = {
+      "shoppingCartId": 1,
+      "productId": productId,
+      "quantity": quantity,
+      "iduser": idUser
+    }
+
+    DashServices.addProductToCart(data)
+    .then(response => {
+      if(response.data.status == 201){
+        alert("Se añadio el producto con éxito");
+      }
+      else{
+        alert("Error añadiendo al carrito");
+      }
+
+    })
+    .catch(error =>{
+      alert(error.message);
+    })
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -104,7 +139,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   productImage: {
-    width: 300,  
+    width: 300,
     height: 150,
     borderRadius: 8,
   },
@@ -119,12 +154,12 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   buttonContainer: {
-    flexDirection: 'column',  
+    flexDirection: 'column',
     width: '85%',
     marginTop: 8,
   },
   buttonWrapper: {
-    marginVertical: 4, 
+    marginVertical: 4,
   },
 });
 

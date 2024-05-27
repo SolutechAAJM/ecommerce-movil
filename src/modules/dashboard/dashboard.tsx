@@ -50,7 +50,7 @@ function Dashboard(): React.JSX.Element {
   const navigation = useNavigation<CategoryProductsScreenNavigationProp>();
 
   const renderItem = ({ item }: { item: Category }) => (
-    <TouchableOpacity onPress={() => navigation.navigate('CategoryProducts', { method: item.type, id: item.id, name: item.name})}>
+    <TouchableOpacity onPress={() => navigation.navigate('CategoryProducts', { method: item.type, id: item.id, name: item.name })}>
       <CategoryItem category={item} />
     </TouchableOpacity>
   );
@@ -74,7 +74,7 @@ function Dashboard(): React.JSX.Element {
       .then(response => {
         if (response.data.status === 200) {
           let categories = response.data.body;
-          categories.forEach((category:any) => {
+          categories.forEach((category: any) => {
             category.type = 'category';
           });
           setCategories(categories);
@@ -91,7 +91,7 @@ function Dashboard(): React.JSX.Element {
         if (response.data.status === 200) {
           let types = response.data.body;
 
-          types.forEach((type:any) => {
+          types.forEach((type: any) => {
             type.type = 'type';
           });
 
@@ -129,6 +129,10 @@ function Dashboard(): React.JSX.Element {
     }
   }, []);
 
+  const goToShopCart = () => {
+    navigation.navigate('ShoppingCart');
+  }
+
   return (
     <TouchableWithoutFeedback onPress={() => setIsActive(false)}>
       <SafeAreaView style={styles.vwDashboard}>
@@ -142,7 +146,11 @@ function Dashboard(): React.JSX.Element {
                   style={styles.txtSearcher}
                   placeholder="I am looking for..."
                 />
-                <CartShopping size={30} color="black" />
+                <TouchableOpacity 
+                  onPress={goToShopCart}
+                >
+                  <CartShopping size={30} color="black" />
+                </TouchableOpacity>
               </View>
             </View>
             <View style={styles.vwCommon}>

@@ -22,4 +22,9 @@ export const DashServices = {
         const response:any = await postResponse('product/search', data);
         return response;
     },
+
+    async addProductToCart(data:any){
+        const response:any = await postResponse('shoppingcart/addproduct', data);
+        return response;
+    }
 }

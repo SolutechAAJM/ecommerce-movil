@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -15,12 +15,22 @@ import { authServices } from './utils/Request';
 import { useNavigation } from '@react-navigation/native';
 import { labels } from '../admin/labels';
 import { setIsLoggedIn } from '../admin/IsLoggedIn';
+import { storeData } from '../common/localstorage';
 
 function Login(): React.JSX.Element {
   const [email, setEmail] = useState('');
+  const [iduser, setIdUser] = useState();
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
+  useEffect(()=>{
+    updateIdUser(iduser);
+  }, [iduser])
+
+  const updateIdUser = async (iduser:any) => {
+    iduser = iduser.toString();
+    await storeData("iduser", iduser);
+  }
 
   const login = async () =>{
     authServices.loginRequest({email,password})
@@ -28,6 +38,7 @@ function Login(): React.JSX.Element {
         alert(JSON.stringify(response.data.message))
         if (response.data.status === 200) {
           setIsLoggedIn(true);
+          setIdUser(response.data.body.user.id);
           navigation.navigate('Dashboard' as never);
         }
     })
