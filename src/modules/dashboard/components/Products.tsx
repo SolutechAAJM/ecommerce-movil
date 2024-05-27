@@ -24,9 +24,9 @@ function Products({ props }: { props: ProductProps }): React.JSX.Element {
         <Text style={style.txtTitle}>{props.name}</Text>
         <View style={style.vwPriceCart}>
             <Text style={style.txtPrice}>${props.price}</Text>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
                 <Text style={style.txtCart}>+</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
       </View>
     )
@@ -34,7 +34,7 @@ function Products({ props }: { props: ProductProps }): React.JSX.Element {
 
 const style = StyleSheet.create({
     vwProduct:{
-        width:'50%',
+        width:'100%',
         marginTop:5,
         marginBottom:5,
         flexDirection:'column',
@@ -54,7 +54,7 @@ const style = StyleSheet.create({
     },
     vwPriceCart:{
         width:'100%',
-        justifyContent:'space-between',
+        justifyContent:'center',
         alignItems:'center',
         flexDirection:'row',
     },

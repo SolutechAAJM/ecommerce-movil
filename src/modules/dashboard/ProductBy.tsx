@@ -33,7 +33,7 @@ const ProductsBy: React.FC = () => {
   const route = useRoute<ProductsByRouteProp>();
   const { name, products } = route.params;
 
-  console.log(JSON.stringify(products));
+  
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 

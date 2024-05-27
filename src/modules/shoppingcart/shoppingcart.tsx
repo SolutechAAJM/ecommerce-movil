@@ -5,6 +5,7 @@ import { ShopServices } from './request';
 import { useNavigation,  RouteProp, useRoute, } from '@react-navigation/native';
 import { RootStackParamList } from '../../../App';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface ImageI {
   id: number;
@@ -24,7 +25,7 @@ interface CartProduct {
   price: number;
   quantity: number;
   idcart:number;
-  images?: ImageI[];
+  images?: [];
 }
 
 
@@ -61,7 +62,7 @@ const ShoppingCart: React.FC = () => {
                 price: item.product.price,
                 quantity: item.quantity,
                 idcart: item.id,
-                images: [],
+                images: item.product.images,
               }));
               setCartProducts(products);
             } else {
@@ -146,7 +147,6 @@ const ShoppingCart: React.FC = () => {
 
 
   const onCreateOrder = () => {
-    console.log("navegando")
     navigation.navigate('OrderFinally', {products: cartProducts})
   }
 
@@ -156,10 +156,8 @@ const ShoppingCart: React.FC = () => {
   };
 
   const renderProductItem = ({ item }: { item: CartProduct }) => (
-  console.log(item),
 
     <View style={styles.productItem}>
-      
       <Image source={{ uri: item.images?.[0]?.url }} style={styles.productImage} />
       <Text style={styles.productName}>{item.name}</Text>
       <Text style={styles.productPrice}>${item.price}</Text>
@@ -178,6 +176,7 @@ const ShoppingCart: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       <Text style={styles.title}>Tu Carrito</Text>
       <FlatList
         data={cartProducts}
@@ -191,6 +190,7 @@ const ShoppingCart: React.FC = () => {
       <TouchableOpacity onPress={()=>{onCreateOrder}} style={styles.totalContainer}>
           <Text style={styles.quantityButtonText}>Finalizar Compra</Text>
         </TouchableOpacity>
+      </ScrollView>
     </SafeAreaView>
   );
 };
