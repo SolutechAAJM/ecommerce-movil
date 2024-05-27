@@ -127,7 +127,7 @@ function Product(): React.JSX.Element {
               </View> */}
             </View>
             <View style={styles.vwSize}>
-              <Text>Descripcion{countImg}</Text>
+              <Text>Descripcion</Text>
               <Text>{productInfo?.description}</Text>
             </View>
             <TouchableOpacity style={styles.tOBuy}>

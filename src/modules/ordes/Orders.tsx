@@ -1,8 +1,9 @@
-import { Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { OrderServices } from './utils/Reques';
 import { getStorageData } from '../common/localstorage';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 interface OrderDetails {
@@ -87,10 +88,38 @@ interface OrderDetails {
         );
     }
     return (
-      <SafeAreaView>
-        <Text>{orderInfo[1].product.name}</Text>
+      <SafeAreaView style={styles.vwOrders}>
+        <ScrollView>
+        {orderInfo.map((order, index) => (
+                <View key={index} style={styles.vwOrder}>
+                    <View >
+                        <Text>{order.id}</Text>
+                        <Text>{order.order.dateOrder}</Text>
+                    </View>
+                    <View>
+                        <Text>{order.quantityProduct}</Text>
+                        <Text>{order.unitPrice}</Text> 
+                    </View>
+                    <Text>{order.product.name}</Text>
+                    <Text>{order.order.orderStatus}</Text>
+                </View>
+            ))}
+        </ScrollView>
       </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    vwOrders:{
+        height:'100%'
+    },
+    vwOrder:{
+        margin:20,
+        padding:10,
+        borderColor:'black',
+        borderWidth:2,
+        borderRadius:20,
+    },
+})
 
 export default Orders
