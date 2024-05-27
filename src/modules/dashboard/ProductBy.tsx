@@ -62,7 +62,7 @@ const ProductsBy: React.FC = () => {
           <Button title="Añadir al carrito" onPress={() => {addItemToCartItem(item.id, 1) }} />
         </View>
         <View style={styles.buttonWrapper}>
-          <Button title="Ver" onPress={() => { }} />
+          <Button title="Ver" onPress={() => navigation.navigate('Product', {id: item.id})} />
         </View>
       </View>
     </View>

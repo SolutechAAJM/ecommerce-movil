@@ -110,6 +110,7 @@ const ShoppingCart: React.FC = () => {
       )
     );
   };
+  
 
   const removeProduct = (productId: number, idcart:number) => {
     ShopServices.deleteCart({"id": idcart})
@@ -130,7 +131,10 @@ const ShoppingCart: React.FC = () => {
   };
 
   const renderProductItem = ({ item }: { item: CartProduct }) => (
+  console.log(item),
+
     <View style={styles.productItem}>
+      
       <Image source={{ uri: item.images?.[0]?.url }} style={styles.productImage} />
       <Text style={styles.productName}>{item.name}</Text>
       <Text style={styles.productPrice}>${item.price}</Text>

@@ -27,7 +27,6 @@ function Nav({ isActive }: NavProps): React.JSX.Element {
             <View>
             <Text>Lolita Martinez</Text>
             <Text>Lolita@gmail.com</Text>
-            <Text>Edit Profile</Text>
           </View> : 
             <View>
               <TouchableOpacity 
