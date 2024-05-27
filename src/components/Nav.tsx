@@ -51,10 +51,13 @@ function Nav({ isActive }: NavProps): React.JSX.Element {
             <CategoryIcon size={30} color="black"/>
             <Text>Category</Text>
           </View>
-          <View style={styles.conteinerButtons}>
+          <TouchableOpacity 
+          style={styles.conteinerButtons}
+          onPress={() => navigation.navigate('Order' as never)}
+          >
             <BoxCheck size={30} color="black"/>
             <Text>Order</Text>
-          </View>
+          </TouchableOpacity>
           {/* <View style={styles.conteinerButtons}>
             <Gear size={30} color="black"/>
             <Text>Setting</Text>

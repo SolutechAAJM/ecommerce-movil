@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,79 +8,133 @@ import {
   View,
 } from 'react-native';
 import stylesG from '../../../stylesG';
-import { Heart, ShareNodes } from '../../../Icons';
+import { ArrowLeft, ArrowRight, Heart, ShareNodes } from '../../../Icons';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { ProductServices } from './utils/Request';
+import { Image } from 'react-native';
+
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  characteristics: string;
+  isOffer: boolean;
+  dateCreation: string;
+  lastModify: string;
+  images: { id: number; url: string; productId: number }[];
+}
+interface ProductsRouteParams {
+  id: number,
+}
+
+type ProductsRouteProp = RouteProp<{ ProductBy: ProductsRouteParams }, 'ProductBy'>;
 
 function Product(): React.JSX.Element {
-  
+  const route = useRoute<ProductsRouteProp>();
+  const { id } = route.params;
+  const [loading, setLoading] = useState(true);
+  const [countImg, setCountImg] = useState(0)
+  const [productInfo, setProductInfo] = useState<Product>({
+    id: 0,
+    name: '',
+    description: '',
+    price: 0,
+    stock: 0,
+    characteristics: '',
+    isOffer: false,
+    dateCreation: '',
+    lastModify: '',
+    images: [],
+  });
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await ProductServices.getProduct(id);
+        if (response.status === 200) {
+          setProductInfo(response.data.body);
+        }
+      } catch (error) {
+        console.log('Failed to load product information');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [id]);
+
+  const increaseCount = () => {
+    if (countImg < productInfo.images.length - 1) {
+      setCountImg(countImg + 1)
+    }
+  };
+  const reduceCount = () => {
+    if (countImg > 0) {
+    setCountImg(countImg - 1)
+    }
+  };
+  if (loading) {
+    return (
+      <SafeAreaView>
+        <Text>cargando</Text>
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView style={styles.product}>
-      <ScrollView>
-      <View style={styles.vwDecoration} />
-        <View style={styles.content}>
-          <View style={styles.vwImgProduct}>
-            <View style={styles.vwImgBtn}>
-              <View style={styles.ejemplo} />
-              <View style={styles.vwBtnLR}>
-                <TouchableOpacity>
-                  <View style={styles.ejemplo} />
+        <ScrollView>
+        <View style={styles.vwDecoration} />
+          <View style={styles.content}>
+            <View style={styles.vwImgProduct}>
+              <View style={styles.vwImgBtn}>
+                <Image source={{ uri:productInfo.images[countImg].url}} style={styles.imgPicture}/>
+                <View style={styles.vwBtnLR}>
+                  <TouchableOpacity onPress={reduceCount}>
+                    <ArrowLeft size={35} color='black'/>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={increaseCount}>
+                    <ArrowRight size={35} color='black'/>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <Text style={styles.txtQuantity}>{countImg+1}/{productInfo.images.length}</Text>
+            </View>
+            <View style={styles.vwPriceLikeShare}>
+              <Text style={styles.txtPriceTitle}>{productInfo?.price}</Text>
+              <View style={styles.vwLikeShare}>
+                <TouchableOpacity style={styles.tOLikeShare}>
+                  <ShareNodes size={35} color='white' />
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <View style={styles.ejemplo} />
+                <TouchableOpacity style={styles.tOLikeShare} >
+                  <Heart size={35} color='white' />
                 </TouchableOpacity>
               </View>
             </View>
-            <Text style={styles.txtQuantity}>1/7</Text>
-          </View>
-          <View style={styles.vwPriceLikeShare}>
-            <Text>$100</Text>
-            <View style={styles.vwLikeShare}>
-              <TouchableOpacity style={styles.tOLikeShare}>
-                <ShareNodes size={35} color='white' />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tOLikeShare}>
-                <Heart size={35} color='white' />
-              </TouchableOpacity>
+            <View style={styles.vwColor}>
+              <Text style={styles.txtPriceTitle}>{productInfo?.name}</Text>
+              {/* <View style={styles.vwImgColor}>
+                <TouchableOpacity style={styles.tOImgColor}>
+                  <View style={styles.ejemplo} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.tOImgColor}>
+                  <View style={styles.ejemplo} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.tOImgColor}>
+                  <View style={styles.ejemplo} />
+                </TouchableOpacity>
+              </View> */}
             </View>
-          </View>
-          <View style={styles.vwColor}>
-            <Text>Zapato azul</Text>
-            <View style={styles.vwImgColor}>
-              <TouchableOpacity style={styles.tOImgColor}>
-                <View style={styles.ejemplo} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tOImgColor}>
-                <View style={styles.ejemplo} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tOImgColor}>
-                <View style={styles.ejemplo} />
-              </TouchableOpacity>
+            <View style={styles.vwSize}>
+              <Text>Descripcion{countImg}</Text>
+              <Text>{productInfo?.description}</Text>
             </View>
+            <TouchableOpacity style={styles.tOBuy}>
+              <Text>Añadir al carrito</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.vwSize}>
-            <Text>Select size</Text>
-            <View style={styles.vwSizes}>
-              <TouchableOpacity style={styles.tOSize}>
-                <Text>35</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tOSize}>
-                <Text>36</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tOSize}>
-                <Text>37</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tOSize}>
-                <Text>38</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tOSize}>
-                <Text>39</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.tOBuy}>
-            <Text>Buy now</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+        </ScrollView>
     </SafeAreaView>
   );
 }
@@ -124,11 +178,16 @@ const styles = StyleSheet.create({
     width:'80%',
     gap:10,
   },
+  imgPicture:{
+    width:'100%',
+    height:180,
+    borderRadius:20,
+  },
   vwBtnLR:{
     flexDirection:'row',
     justifyContent: 'center', 
     alignItems:'center',
-    gap:10,
+    gap:50,
   },
   txtQuantity:{
     position: 'absolute',
@@ -153,6 +212,10 @@ const styles = StyleSheet.create({
     alignItems:'center',
     borderRadius:15,
   },
+  txtPriceTitle:{
+    fontSize:24,
+    color:'black',
+  },
   vwColor:{
     width:'80%',
     gap:30,
@@ -175,12 +238,11 @@ const styles = StyleSheet.create({
   },
   vwSize:{
     width:'80%',
-    gap:30,
+    gap:20,
   },
   vwSizes:{
     width:'100%',
     flexDirection:'row',
-    justifyContent:'center',
     gap:15,
   },
   tOSize:{

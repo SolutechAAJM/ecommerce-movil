@@ -35,7 +35,6 @@ const ProductsBy: React.FC = () => {
   const renderProductItem = ({ item }: { item: Product }) => (
     <View style={styles.productItem}>
 
-      {/* <Text>Aguapanrl</Text> */}
       <FlatList
         data={item.images}
         renderItem={({ item: image }) => (
