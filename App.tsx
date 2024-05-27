@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SignUp from './src/modules/auth/Signup';
+import SignUp from './src/modules/auth/signup';
 import Dashboard from './src/modules/dashboard/dashboard';
 import Product from './src/modules/products/Product';
-import Login from './src/modules/auth/Login';
+import Login from './src/modules/auth/login';
 import ProductsBy from './src/modules/dashboard/ProductBy';
 import CategoryProducts from './src/modules/dashboard/CategoryProducts';
 import ContactUs from './src/modules/common/ContactUs';

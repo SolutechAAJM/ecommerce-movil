@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, SafeAreaView, Image, Button, TouchableOpacity } from 'react-native';
 import { getStorageData } from '../common/localstorage';
 import { ShopServices } from './request';
-import { useNavigation,  RouteProp, useRoute, } from '@react-navigation/native';
+import { useNavigation, RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../../App';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -23,10 +23,9 @@ interface CartProduct {
   name: string;
   price: number;
   quantity: number;
-  idcart:number;
+  idcart: number;
   images?: ImageI[];
 }
-
 
 interface CategoryProductsRouteParams {
   method: string;
@@ -36,8 +35,6 @@ interface CategoryProductsRouteParams {
 
 type CategoryProductsRouteProp = RouteProp<{ CategoryProducts: CategoryProductsRouteParams }, 'CategoryProducts'>;
 type NavigationProp = StackNavigationProp<RootStackParamList, 'CategoryProducts'>;
-
-
 
 const ShoppingCart: React.FC = () => {
   const [load, setLoad] = useState(false);
@@ -78,7 +75,7 @@ const ShoppingCart: React.FC = () => {
     fetchData();
   }, [load]);
 
-  const increaseQuantity = (productId: number, idcart:number) => {
+  const increaseQuantity = (productId: number, idcart: number) => {
     let data = {
       'param': 'sumar',
       'id': idcart
@@ -128,38 +125,36 @@ const ShoppingCart: React.FC = () => {
       )
     );
   };
-  
 
-  const removeProduct = (productId: number, idcart:number) => {
-    ShopServices.deleteCart({"id": idcart})
-    .then((response)=>{
-      if(response.data.status != 200){
+
+  const removeProduct = (productId: number, idcart: number) => {
+    ShopServices.deleteCart({ "id": idcart })
+      .then((response) => {
+        if (response.data.status != 200) {
+          alert("Ocurrió un error al eliminar el producto");
+        }
+      })
+      .catch(error => {
         alert("Ocurrió un error al eliminar el producto");
-      }
-    })
-    .catch(error=>{
-      alert("Ocurrió un error al eliminar el producto");
-    })
-    
+      })
+
     setCartProducts(prevProducts => prevProducts.filter(product => product.id !== productId));
   };
 
-
   const onCreateOrder = () => {
     console.log("navegando")
-    navigation.navigate('OrderFinally', {products: cartProducts})
+    navigation.navigate('OrderFinally', { products: cartProducts })
   }
-
 
   const getTotalPrice = () => {
     return cartProducts.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
   };
 
   const renderProductItem = ({ item }: { item: CartProduct }) => (
-  console.log(item),
+    console.log(item),
 
     <View style={styles.productItem}>
-      
+
       <Image source={{ uri: item.images?.[0]?.url }} style={styles.productImage} />
       <Text style={styles.productName}>{item.name}</Text>
       <Text style={styles.productPrice}>${item.price}</Text>
@@ -188,9 +183,9 @@ const ShoppingCart: React.FC = () => {
       <View style={styles.totalContainer}>
         <Text style={styles.totalText}>Precio Total: ${getTotalPrice()}</Text>
       </View>
-      <TouchableOpacity onPress={()=>{onCreateOrder}} style={styles.totalContainer}>
-          <Text style={styles.quantityButtonText}>Finalizar Compra</Text>
-        </TouchableOpacity>
+      <TouchableOpacity onPress={onCreateOrder} style={styles.finalizeButton}>
+        <Text style={styles.finalizeButtonText}>Finalizar Compra</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -263,6 +258,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   totalText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  finalizeButton: {
+    backgroundColor: '#000',
+    padding: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginVertical: 16,
+  },
+  finalizeButtonText: {
+    color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
   },

@@ -17,9 +17,6 @@ export const ShopServices = {
     },
 
     
-    async createOrder (data: any) {
-        const response:any = await postResponse('orders/create', data)
-        return response
-    },
+   
 
 }
