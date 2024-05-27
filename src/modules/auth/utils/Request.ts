@@ -8,5 +8,8 @@ export const authServices = {
     async SignUpRequest (data:any){
         const response:any = await postResponse('auth/register', data)
         return response
-    }
+    },
+    // async getUser (){
+    //     const response:any = await 
+    // }
 }

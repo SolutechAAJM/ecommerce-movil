@@ -71,7 +71,7 @@ interface OrderDetails {
         };
         fetchOrder();
       }, []);
-      const  getId = async () => {
+    const  getId = async () => {
         const id:any =await getStorageData('iduser')
         if (id !== undefined && id !== null) {
             return id.toString();

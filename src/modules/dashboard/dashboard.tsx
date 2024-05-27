@@ -158,7 +158,7 @@ function Dashboard(): React.JSX.Element {
               </View>
             </View>
             <View style={styles.vwCommon}>
-              <Text>Categorias</Text>
+              <Text style={styles.txtTitles}>Categorias</Text>
               <View style={styles.vwCategories}>
                 <FlatList
                   data={categories}
@@ -169,7 +169,7 @@ function Dashboard(): React.JSX.Element {
                   keyExtractor={(item) => item.id.toString()}
                 />
               </View>
-              <Text style={styles.textType}>Tipos</Text>
+              <Text style={[styles.textType, styles.txtTitles]}>Tipos</Text>
               <View style={styles.vwTypes}>
                 <FlatList
                   data={types}
@@ -181,8 +181,8 @@ function Dashboard(): React.JSX.Element {
                 />
               </View>
             </View>
-            <View style={styles.vwCommon}>
-              <Text>Algo mas</Text>
+            <View style={[styles.vwCommon, styles.vwProducts]}>
+              <Text style={styles.txtTitles}>Productos</Text>
               <FlatList
                 data={products}
                 pagingEnabled
@@ -214,6 +214,14 @@ const styles = StyleSheet.create({
     padding: 6,
     backgroundColor: stylesG.primaryColor,
     borderRadius: 16,
+  },
+  txtTitles:{
+    fontSize:24,
+    color:'black'
+  },
+  vwProducts:{
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   vwSearcher: {
     flex: 1,

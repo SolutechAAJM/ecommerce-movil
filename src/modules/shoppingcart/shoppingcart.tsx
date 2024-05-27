@@ -5,6 +5,7 @@ import { ShopServices } from './request';
 import { useNavigation, RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../../App';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface ImageI {
   id: number;
@@ -58,7 +59,7 @@ const ShoppingCart: React.FC = () => {
                 price: item.product.price,
                 quantity: item.quantity,
                 idcart: item.id,
-                images: [],
+                images: item.product.images,
               }));
               setCartProducts(products);
             } else {
@@ -151,8 +152,6 @@ const ShoppingCart: React.FC = () => {
   };
 
   const renderProductItem = ({ item }: { item: CartProduct }) => (
-    console.log(item),
-
     <View style={styles.productItem}>
 
       <Image source={{ uri: item.images?.[0]?.url }} style={styles.productImage} />
@@ -173,19 +172,22 @@ const ShoppingCart: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Tu Carrito</Text>
-      <FlatList
-        data={cartProducts}
-        renderItem={renderProductItem}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.productList}
-      />
-      <View style={styles.totalContainer}>
-        <Text style={styles.totalText}>Precio Total: ${getTotalPrice()}</Text>
-      </View>
-      <TouchableOpacity onPress={onCreateOrder} style={styles.finalizeButton}>
-        <Text style={styles.finalizeButtonText}>Finalizar Compra</Text>
-      </TouchableOpacity>
+      <ScrollView>
+        <Text style={styles.title}>Tu Carrito</Text>
+        <FlatList
+          data={cartProducts}
+          renderItem={renderProductItem}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={styles.productList}
+        />
+        <View style={styles.totalContainer}>
+          <Text style={styles.totalText}>Precio Total: ${getTotalPrice()}</Text>
+        </View>
+        <TouchableOpacity onPress={onCreateOrder} style={styles.finalizeButton}>
+          <Text style={styles.finalizeButtonText}>Finalizar Compra</Text>
+        </TouchableOpacity>
+      </ScrollView>
+
     </SafeAreaView>
   );
 };

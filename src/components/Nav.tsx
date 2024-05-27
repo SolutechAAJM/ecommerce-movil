@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,23 +10,42 @@ import { BoxCheck, CategoryIcon, CircleUser, Exit, Gear, HouseChimney, User } fr
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { getIsLoggedIn, setIsLoggedIn } from '../modules/admin/IsLoggedIn';
+import { getStorageData } from '../modules/common/localstorage';
 
 interface NavProps {
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+
+
 function Nav({ isActive }: NavProps): React.JSX.Element {
   const navigation = useNavigation();
-  
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+
+useEffect(() => {
+  getUser()
+}, [])
+
+
+  const  getUser = async () => {
+    const name:any =await getStorageData('nameUser')
+    const email:any =await getStorageData('emailUser')
+    setName(name)
+    setEmail(email)
+}
+ 
+
+
   return (
         <SafeAreaView style={[styles.vwnav, isActive && styles.activeNav]}>
           <View style={styles.conteinerInfo}>
             <User size={50} color='black'/> 
             {getIsLoggedIn() ? 
             <View>
-            <Text>Lolita Martinez</Text>
-            <Text>Lolita@gmail.com</Text>
+            <Text>{name}</Text>
+            <Text>{email}</Text>
           </View> : 
             <View>
               <TouchableOpacity 
@@ -46,10 +65,10 @@ function Nav({ isActive }: NavProps): React.JSX.Element {
             <HouseChimney size={30} color="black"/>
             <Text>Home</Text>
           </TouchableOpacity>
-          <View style={styles.conteinerButtons}>
+          {/* <View style={styles.conteinerButtons}>
             <CategoryIcon size={30} color="black"/>
             <Text>Category</Text>
-          </View>
+          </View> */}
           <TouchableOpacity 
           style={styles.conteinerButtons}
           onPress={() => navigation.navigate('Order' as never)}

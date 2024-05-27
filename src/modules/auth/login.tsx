@@ -19,17 +19,19 @@ import { storeData } from '../common/localstorage';
 
 function Login(): React.JSX.Element {
   const [email, setEmail] = useState('');
-  const [iduser, setIdUser] = useState();
+  const [user, setUser] = useState();
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
   useEffect(()=>{
-    updateIdUser(iduser);
-  }, [iduser])
+    updateIdUser(user);
+  }, [user])
 
-  const updateIdUser = async (iduser:any) => {
-    iduser = iduser.toString();
-    await storeData("iduser", iduser);
+  const updateIdUser = async (user:any) => {
+    user.id = user.id.toString();
+    await storeData("iduser", user.id);
+    await storeData("nameUser", user.fullName);
+    await storeData("emailUser", user.email);
   }
 
   const login = async () =>{
@@ -38,7 +40,7 @@ function Login(): React.JSX.Element {
         alert(JSON.stringify(response.data.message))
         if (response.data.status === 200) {
           setIsLoggedIn(true);
-          setIdUser(response.data.body.user.id);
+          setUser(response.data.body.user);
           navigation.navigate('Dashboard' as never);
         }
     })
