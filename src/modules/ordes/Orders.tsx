@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { OrderServices } from './utils/Reques';
 import { getStorageData } from '../common/localstorage';
@@ -92,16 +92,19 @@ interface OrderDetails {
         <ScrollView>
         {orderInfo.map((order, index) => (
                 <View key={index} style={styles.vwOrder}>
-                    <View >
-                        <Text>{order.id}</Text>
+                    <View style={styles.vwIdDateOrder}>
+                        <Text>Id de la orden:{order.id}</Text>
                         <Text>{order.order.dateOrder}</Text>
                     </View>
-                    <View>
-                        <Text>{order.quantityProduct}</Text>
-                        <Text>{order.unitPrice}</Text> 
+                    <View style={styles.vwQuantityPrice}>
+                        <Text>Cantidad:{order.quantityProduct}</Text>
+                        <Text>Precio:{order.unitPrice}</Text> 
                     </View>
-                    <Text>{order.product.name}</Text>
+                    <Text>Producto:{order.product.name}</Text>
                     <Text>{order.order.orderStatus}</Text>
+                    <TouchableOpacity>
+
+                    </TouchableOpacity>
                 </View>
             ))}
         </ScrollView>
@@ -119,6 +122,20 @@ const styles = StyleSheet.create({
         borderColor:'black',
         borderWidth:2,
         borderRadius:20,
+    },
+    vwIdDateOrder:{
+        width:'100%',
+        height:20,
+        justifyContent:'space-between',
+        alignItems:'center',
+        flexDirection:'row'
+    },
+    vwQuantityPrice:{
+        width:'80%',
+        height:20,
+        justifyContent:'space-between',
+        alignItems:'center',
+        flexDirection:'row'
     },
 })
 
